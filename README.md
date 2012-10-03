@@ -45,9 +45,15 @@ scp: {
 }
 ```
 
-## Release History
+### Release History
 _(Nothing yet)_
 
-## License
-Copyright (c) 2012 Andrew Jones  
+### License
+Copyright (c) 2012 Andrew Jones
 Licensed under the MIT license.
+
+### TODO
+
+Decide on SCP/SSH library
+  - https://github.com/tsmith/node-control
+  - https://github.com/ecto/node-scp
