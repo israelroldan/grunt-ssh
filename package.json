@@ -1,0 +1,36 @@
+{
+  "name": "grunt-scp",
+  "description": "Copy files to a (remote) machine running an SSH daemon.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/andrewrjones/grunt-scp",
+  "author": {
+    "name": "Andrew Jones",
+    "email": "andrew@arjones.co.uk",
+    "url": "http://andrew-jones.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrewrjones/grunt-scp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andrewrjones/grunt-scp/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/andrewrjones/grunt-scp/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/grunt-scp",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.3.16"
+  },
+  "keywords": ["gruntplugin", "scp"]
+}
