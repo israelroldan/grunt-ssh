@@ -21,10 +21,10 @@ var grunt = require('grunt');
 */
 
 exports.scp = {
-  'one': function(test) {
+  'one': function (test) {
     test.expect(1);
     // tests here
-    test.equal(1,1);
+    test.equal(1, 1);
     test.done();
   }
 };

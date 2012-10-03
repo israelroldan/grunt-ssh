@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -8,6 +8,9 @@ module.exports = function(grunt) {
     },
     lint: {
       files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
+    },
+    beautify: {
+      files: '<config:lint.files>'
     },
     watch: {
       files: '<config:lint.files>',
@@ -33,7 +36,12 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-beautify');
+  grunt.loadNpmTasks('grunt-bump');
+
   // Default task.
   grunt.registerTask('default', 'lint test');
+
+  grunt.registerTask('tidy', 'beautify');
 
 };
