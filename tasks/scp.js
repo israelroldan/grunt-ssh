@@ -1,6 +1,6 @@
 /*
- * grunt-scp
- * https://github.com/ajones/grunt-scp
+ * grunt-ssh
+ * https://github.com/ajones/grunt-ssh
  *
  * Copyright (c) 2012 Andrew Jones
  * Licensed under the MIT license.

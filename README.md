@@ -1,6 +1,6 @@
 ***Work in progress***
 
-# grunt-scp
+# grunt-ssh
 
 Copy files to a (remote) machine running an SSH daemon.
 
@@ -53,9 +53,3 @@ _(Nothing yet)_
 ### License
 Copyright (c) 2012 Andrew Jones
 Licensed under the MIT license.
-
-### TODO
-
-Decide on SCP/SSH library
-  - https://github.com/tsmith/node-control
-  - https://github.com/ecto/node-scp
