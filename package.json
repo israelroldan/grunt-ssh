@@ -28,7 +28,9 @@
   "scripts": {
     "test": "grunt test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ssh2": "*"
+  },
   "devDependencies": {
     "grunt": "~0.3.16",
     "grunt-bump": "*",
