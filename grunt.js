@@ -33,8 +33,14 @@ module.exports = function (grunt) {
       globals: {
         exports: true
       }
+    },
+    scp: {
+      test: {}
     }
   });
+
+  // Actually load this plugin's task(s).
+  grunt.loadTasks('tasks');
 
   grunt.loadNpmTasks('grunt-beautify');
   grunt.loadNpmTasks('grunt-bump');
