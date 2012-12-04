@@ -1,3 +1,5 @@
+***Work in progress***
+
 # grunt-scp
 
 Copy files to a (remote) machine running an SSH daemon.
