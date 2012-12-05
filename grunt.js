@@ -1,8 +1,12 @@
 module.exports = function (grunt) {
+  'use strict';
 
   // Project configuration.
   grunt.initConfig({
     pkg: '<json:package.json>',
+    // secret.json contains the host, username and password for a server to
+    // run the tests on.
+    secret: '<json:secret.json>',
     test: {
       files: ['test/**/*.js']
     },
@@ -36,6 +40,14 @@ module.exports = function (grunt) {
     },
     scp: {
       test: {}
+    },
+    sshexec: {
+      test: {
+        command: 'uptime',
+        host: '<%= secret.host %>',
+        username: '<%= secret.username %>',
+        password: '<%= secret.password %>'
+      }
     }
   });
 
