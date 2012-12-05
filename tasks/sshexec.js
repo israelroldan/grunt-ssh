@@ -6,6 +6,8 @@
  * Licensed under the MIT license.
  */
 
+// TODO: use passphrase
+// TODO: unit tests
 module.exports = function (grunt) {
   'use strict';
 
@@ -19,6 +21,7 @@ module.exports = function (grunt) {
     var done = this.async();
 
     // validate data options
+    // TODO: can I do this with less typing?
     var data = this.data;
 
     // ensure we have a command
@@ -33,6 +36,7 @@ module.exports = function (grunt) {
       grunt.warn('The command property must be a string.');
       return false;
     }
+    data.command = grunt.template.process(data.command);
 
     // ensure we have a host
     if (!data.host) {
@@ -117,6 +121,7 @@ module.exports = function (grunt) {
     c.connect({
       host: data.host,
       port: 22,
+      // TODO: from an option
       username: data.username,
       password: data.password
     });
