@@ -14,57 +14,23 @@ module.exports = function (grunt) {
   grunt.util = grunt.util || grunt.utils;
 
   grunt.registerMultiTask('sshexec', 'Executes a shell command on a remote machine', function () {
-
+    var utillib = require('./lib/util').init(grunt);
     var Connection = require('ssh2');
     var c = new Connection();
 
     var done = this.async();
 
     // validate data options
-    // TODO: can I do this with less typing?
     var data = this.data;
 
     // ensure we have a command
-    if (!data.command) {
-      grunt.warn('Missing command property.');
-      return false;
-    }
-    if (grunt.util._.isFunction(data.command)) {
-      data.command = (grunt);
-    }
-    if (!grunt.util._(data.command).isString()) {
-      grunt.warn('The command property must be a string.');
-      return false;
-    }
-    data.command = grunt.template.process(data.command);
+    data.command = utillib.validateStringAndProcess('command', data.command);
 
     // ensure we have a host
-    if (!data.host) {
-      grunt.warn('Missing host property.');
-      return false;
-    }
-    if (grunt.util._.isFunction(data.host)) {
-      data.host = data.host(grunt);
-    }
-    if (!grunt.util._(data.host).isString()) {
-      grunt.warn('The host property must be a string.');
-      return false;
-    }
-    data.host = grunt.template.process(data.host);
+    data.host = utillib.validateStringAndProcess('host', data.host);
 
     // ensure we have a username
-    if (!data.username) {
-      grunt.warn('Missing username property.');
-      return false;
-    }
-    if (grunt.util._.isFunction(data.username)) {
-      data.username = data.username(grunt);
-    }
-    if (!grunt.util._(data.username).isString()) {
-      grunt.warn('The host property must be a string.');
-      return false;
-    }
-    data.username = grunt.template.process(data.username);
+    data.username = utillib.validateString('username', data.username);
 
     // optional password
     if (data.password) {
