@@ -10,7 +10,7 @@ exports.init = function (grunt) {
 
   var exports = {};
 
-  // Return gzipped source.
+  // Ensures the string is set and valid
   exports.validateString = function (name, string) {
     if (!string) {
       grunt.warn('Missing ' + name + ' property.');
@@ -20,15 +20,29 @@ exports.init = function (grunt) {
       string = string(grunt);
     }
     if (!grunt.util._(string).isString()) {
-      grunt.warn('The command property must be a string.');
+      grunt.warn('The ' + name + ' property must be a string.');
       return false;
     }
     return string;
   };
 
+  // Ensures the string is set and valid then processes the template
   exports.validateStringAndProcess = function (name, string) {
     return grunt.template.process(exports.validateString(name, string));
-  }
+  };
+
+  // Ensures the number is set and valid
+  exports.validateNumber = function (name, number) {
+    if (!number) {
+      grunt.warn('Missing ' + name + ' property.');
+      return false;
+    }
+    if (!grunt.util._(number).isNumber()) {
+      grunt.warn('The ' + name + ' property must be a number.');
+      return false;
+    }
+    return number;
+  };
 
   return exports;
 };

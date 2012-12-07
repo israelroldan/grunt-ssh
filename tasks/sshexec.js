@@ -22,15 +22,11 @@ module.exports = function (grunt) {
 
     // validate data options
     var data = this.data;
-
-    // ensure we have a command
     data.command = utillib.validateStringAndProcess('command', data.command);
-
-    // ensure we have a host
     data.host = utillib.validateStringAndProcess('host', data.host);
-
-    // ensure we have a username
-    data.username = utillib.validateString('username', data.username);
+    data.username = utillib.validateStringAndProcess('username', data.username);
+    data.port |= 22;
+    data.port = utillib.validateNumber('port', data.port);
 
     // optional password
     if (data.password) {
@@ -86,8 +82,7 @@ module.exports = function (grunt) {
     });
     c.connect({
       host: data.host,
-      port: 22,
-      // TODO: from an option
+      port: data.port,
       username: data.username,
       password: data.password
     });
