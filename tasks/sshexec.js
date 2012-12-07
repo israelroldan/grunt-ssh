@@ -25,7 +25,7 @@ module.exports = function (grunt) {
     data.command = utillib.validateStringAndProcess('command', data.command);
     data.host = utillib.validateStringAndProcess('host', data.host);
     data.username = utillib.validateStringAndProcess('username', data.username);
-    data.port |= 22;
+    data.port |= utillib.port;
     data.port = utillib.validateNumber('port', data.port);
 
     // optional password

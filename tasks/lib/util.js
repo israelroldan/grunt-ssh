@@ -10,6 +10,8 @@ exports.init = function (grunt) {
 
   var exports = {};
 
+  exports.port = 22;
+
   // Ensures the string is set and valid
   exports.validateString = function (name, string) {
     if (!string) {
