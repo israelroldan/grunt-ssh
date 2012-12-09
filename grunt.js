@@ -38,7 +38,7 @@ module.exports = function (grunt) {
         exports: true
       }
     },
-    scp: {
+    sftp: {
       test: {
         host: '<%= secret.host %>',
         username: '<%= secret.username %>',

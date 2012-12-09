@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 
   grunt.util = grunt.util || grunt.utils;
 
-  grunt.registerMultiTask('scp', 'Copy files to a (remote) machine running an SSH daemon.', function () {
+  grunt.registerMultiTask('sftp', 'Copy files to a (remote) machine running an SSH daemon.', function () {
     var utillib = require('./lib/util').init(grunt);
     var fs = require('fs');
     var Connection = require('ssh2');
