@@ -40,9 +40,14 @@ module.exports = function (grunt) {
     },
     sftp: {
       test: {
-        host: '<%= secret.host %>',
-        username: '<%= secret.username %>',
-        password: '<%= secret.password %>'
+        files: {
+          "./": "*json"
+        },
+        options: {
+          host: '<%= secret.host %>',
+          username: '<%= secret.username %>',
+          password: '<%= secret.password %>'
+        }
       }
     },
     sshexec: {

@@ -29,7 +29,9 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "ssh2": "git://github.com/mscdex/ssh2.git"
+    "ssh2": "git://github.com/mscdex/ssh2.git",
+    "grunt-lib-contrib": "~0.3.0",
+    "async": "*"
   },
   "devDependencies": {
     "grunt": "~0.3.16",
