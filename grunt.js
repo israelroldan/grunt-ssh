@@ -39,7 +39,11 @@ module.exports = function (grunt) {
       }
     },
     scp: {
-      test: {}
+      test: {
+        host: '<%= secret.host %>',
+        username: '<%= secret.username %>',
+        password: '<%= secret.password %>'
+      }
     },
     sshexec: {
       test: {
