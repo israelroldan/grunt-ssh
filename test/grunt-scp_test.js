@@ -22,6 +22,7 @@ var grunt = require('grunt');
 
 exports.scp = {
   'one': function (test) {
+    'use strict';
     test.expect(1);
     // tests here
     test.equal(1, 1);
