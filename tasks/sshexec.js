@@ -14,38 +14,31 @@ module.exports = function (grunt) {
   grunt.util = grunt.util || grunt.utils;
 
   grunt.registerMultiTask('sshexec', 'Executes a shell command on a remote machine', function () {
+    var helpers = require('grunt-lib-contrib').init(grunt);
     var utillib = require('./lib/util').init(grunt);
     var Connection = require('ssh2');
     var c = new Connection();
 
     var done = this.async();
 
-    // validate data options
-    var data = this.data;
-    data.command = utillib.validateStringAndProcess('command', data.command);
-    data.host = utillib.validateStringAndProcess('host', data.host);
-    data.username = utillib.validateStringAndProcess('username', data.username);
-    data.port |= utillib.port;
-    data.port = utillib.validateNumber('port', data.port);
+    var command = utillib.validateStringAndProcess('command', this.data.command);
 
-    // optional password
-    if (data.password) {
-      if (grunt.util._.isFunction(data.password)) {
-        data.password = data.password(grunt);
-      }
-      if (!grunt.util._(data.password).isString()) {
-        grunt.warn('The password property must be a string.');
-        return false;
-      }
-      data.password = grunt.template.process(data.password);
-    }
+    var options = helpers.options(this, {
+      host: false,
+      username: false,
+      password: false,
+      port: utillib.port,
+      minimatch: {}
+    });
+
+    grunt.verbose.writeflags(options, 'Options');
 
     c.on('connect', function () {
       grunt.verbose.writeln('Connection :: connect');
     });
     c.on('ready', function () {
       grunt.verbose.writeln('Connection :: ready');
-      c.exec(data.command, function (err, stream) {
+      c.exec(command, function (err, stream) {
         if (err) {
           throw err;
         }
@@ -81,10 +74,10 @@ module.exports = function (grunt) {
       done();
     });
     c.connect({
-      host: data.host,
-      port: data.port,
-      username: data.username,
-      password: data.password
+      host: options.host,
+      port: options.port,
+      username: options.username,
+      password: options.password
     });
   });
 };

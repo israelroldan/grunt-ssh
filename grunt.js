@@ -53,9 +53,11 @@ module.exports = function (grunt) {
     sshexec: {
       test: {
         command: 'uptime',
-        host: '<%= secret.host %>',
-        username: '<%= secret.username %>',
-        password: '<%= secret.password %>'
+        options: {
+          host: '<%= secret.host %>',
+          username: '<%= secret.username %>',
+          password: '<%= secret.password %>'
+        }
       }
     }
   });
