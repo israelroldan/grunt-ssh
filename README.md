@@ -1,51 +1,104 @@
-***Work in progress***
-
 # grunt-ssh
 
 SSH tasks for Grunt.
 
-### Overview
+## Overview
 
-Inside your `grunt.js` file add a section named `scp`.
+This library provides two Grunt tasks for ssh:
+
+* _sftp_
+* _sshexec_
+
+## Synopsys
+
+```js
+// don't keep passwords in source control
+secret: '<json:secret.json>',
+sftp: {
+  test: {
+    files: {
+      "./": "*json"
+    },
+    options: {
+      host: '<%= secret.host %>',
+      username: '<%= secret.username %>',
+      password: '<%= secret.password %>'
+    }
+  }
+},
+sshexec: {
+  test: {
+    command: 'uptime',
+    options: {
+      host: '<%= secret.host %>',
+      username: '<%= secret.username %>',
+      password: '<%= secret.password %>'
+    }
+  }
+}
+```
+
+## Description
+
+### sftp
+
+Copies one or more files to a remote server over ssh.
+
+Inside your `grunt.js` file add a section named `sftp`.
 
 #### Parameters
 
 ##### files ```object```
 
-This defines what files this task will process and should contain key:value pairs.
+The files to copy. Should contain key:value pairs.
 
 ##### options ```object```
 
-This controls how this task (and its helpers) operate and should contain key:value pairs, see options below.
-
-#### Options
-
-##### user ```string```
+###### username ```string```
 
 The username to authenticate as on remote system.
 
-##### host ```string```
+###### password ```string```
+
+The password to authenticate on remote system.
+
+###### host ```string```
 
 The remote host to copy to, set up in your `~/.ssh/config`.
 
-##### port ```number```
+###### port ```number```
 
 The remote port, optional, defaults to `22`.
 
-#### Config Examples
+### sshexec
 
-``` javascript
-scp: {
-  deploy: {
-    options: {
-      user: 'bob',
-      host: 'google.com',
-      port: 500
-    },
-    files: {}
-  }
-}
-```
+Runs a command over ssh.
+
+Inside your `grunt.js` file add a section named `sshexec`.
+
+#### Parameters
+
+##### command ```string```
+
+The command to run.
+
+##### options ```object```
+
+###### username ```string```
+
+The username to authenticate as on remote system.
+
+###### password ```string```
+
+The password to authenticate on remote system.
+
+###### host ```string```
+
+The remote host to copy to, set up in your `~/.ssh/config`.
+
+###### port ```number```
+
+The remote port, optional, defaults to `22`.
 
 ### Release History
 _(Nothing yet)_

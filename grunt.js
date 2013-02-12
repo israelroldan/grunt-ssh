@@ -62,7 +62,7 @@ module.exports = function (grunt) {
     }
   });
 
-  // Actually load this plugin's task(s).
+  // Actually load this plugin's tasks
   grunt.loadTasks('tasks');
 
   grunt.loadNpmTasks('grunt-beautify');
