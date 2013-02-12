@@ -19,6 +19,7 @@ module.exports = function (grunt) {
     var Connection = require('ssh2');
 
     var options = helpers.options(this, {
+      path: '',
       host: false,
       username: false,
       password: false,
@@ -65,7 +66,7 @@ module.exports = function (grunt) {
 
           async.forEach(srcFiles, function (srcFile, callback) {
             var from = fs.createReadStream(srcFile);
-            var to = sftp.createWriteStream(srcFile);
+            var to = sftp.createWriteStream(options.path + srcFile);
 
             to.on('close', function () {
               callback();

@@ -20,6 +20,7 @@ sftp: {
       "./": "*json"
     },
     options: {
+      path: '/tmp/',
       host: '<%= secret.host %>',
       username: '<%= secret.username %>',
       password: '<%= secret.password %>'
@@ -53,6 +54,10 @@ Inside your `grunt.js` file add a section named `sftp`.
 The files to copy. Should contain key:value pairs.
 
 ##### options ```object```
+
+###### path ```string```
+
+The path on the remote server. Defaults to home.
 
 ###### username ```string```
 
