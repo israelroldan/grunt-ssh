@@ -59,6 +59,10 @@ The files to copy. Should contain key:value pairs.
 
 The path on the remote server. Defaults to home.
 
+###### minimatch ```object```
+
+Options for [minimatch](https://github.com/isaacs/minimatch).
+
 ###### username ```string```
 
 The username to authenticate as on remote system.
