@@ -51,5 +51,5 @@ scp: {
 _(Nothing yet)_
 
 ### License
-Copyright (c) 2012 Andrew Jones
+Copyright (c) 2013 Andrew Jones
 Licensed under the MIT license.
