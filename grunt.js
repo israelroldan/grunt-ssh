@@ -46,7 +46,8 @@ module.exports = function (grunt) {
         options: {
           host: '<%= secret.host %>',
           username: '<%= secret.username %>',
-          password: '<%= secret.password %>'
+          password: '<%= secret.password %>',
+          path: "/tmp/"
         }
       }
     },
