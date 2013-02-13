@@ -110,7 +110,7 @@ The remote host to copy to, set up in your `~/.ssh/config`.
 The remote port, optional, defaults to `22`.
 
 ### Release History
-_(Nothing yet)_
+* 2013/02/13 - v0.1.0 - Initial release with _sshexec_ and _sftp_ tasks.
 
 ### License
 Copyright (c) 2013 Andrew Jones
