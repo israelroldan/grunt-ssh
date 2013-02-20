@@ -3,10 +3,9 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    pkg: '<json:package.json>',
     // secret.json contains the host, username and password for a server to
     // run the tests on.
-    secret: '<json:secret.json>',
+    secret: grunt.file.readJSON('secret.json'),
     test: {
       files: ['test/**/*.js']
     },
