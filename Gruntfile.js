@@ -10,14 +10,11 @@ module.exports = function (grunt) {
     test: {
       files: ['test/**/*.js']
     },
-    lint: {
-      files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
-    },
     beautify: {
-      files: '<config:lint.files>'
+      files: '<config:jshint.files>'
     },
     watch: {
-      files: '<config:lint.files>',
+      files: '<config:jshint.files>',
       tasks: 'default'
     },
     jshint: {
@@ -32,11 +29,12 @@ module.exports = function (grunt) {
         undef: true,
         boss: true,
         eqnull: true,
-        node: true
+        node: true,
+        globals: {
+          exports: true
+        }
       },
-      globals: {
-        exports: true
-      }
+      files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
     },
     sftp: {
       test: {
@@ -66,12 +64,13 @@ module.exports = function (grunt) {
   // Actually load this plugin's tasks
   grunt.loadTasks('tasks');
 
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-beautify');
   grunt.loadNpmTasks('grunt-bump');
 
   // Default task.
-  grunt.registerTask('default', 'lint test');
+  grunt.registerTask('default', ['jshint']);
 
-  grunt.registerTask('tidy', 'beautify');
+  grunt.registerTask('tidy', ['beautify']);
 
 };
