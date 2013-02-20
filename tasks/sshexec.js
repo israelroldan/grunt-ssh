@@ -62,7 +62,7 @@ module.exports = function (grunt) {
       });
     });
     c.on('error', function (err) {
-      grunt.verbose.writeln('Connection :: error :: ' + err);
+      grunt.fail.warn('Connection :: error :: ' + err);
     });
     c.on('end', function () {
       grunt.verbose.writeln('Connection :: end');
