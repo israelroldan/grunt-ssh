@@ -1,19 +1,23 @@
 # grunt-ssh
 
-SSH tasks for Grunt.
+> SSH tasks for Grunt.
 
 ## Overview
+
+This plugin requires Grunt `~0.4.0`
 
 This library provides two Grunt tasks for ssh:
 
 * _sftp_
 * _sshexec_
 
+*This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can't please use v0.1.0.*
+
 ## Synopsys
 
 ```js
 // don't keep passwords in source control
-secret: '<json:secret.json>',
+secret: grunt.file.readJSON('secret.json'),
 sftp: {
   test: {
     files: {
@@ -110,6 +114,7 @@ The remote host to copy to, set up in your `~/.ssh/config`.
 The remote port, optional, defaults to `22`.
 
 ### Release History
+* 2013/02/20 - v0.2.0 - Update for grunt 0.4.x.
 * 2013/02/13 - v0.1.0 - Initial release with _sshexec_ and _sftp_ tasks.
 
 ### License
