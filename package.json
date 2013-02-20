@@ -34,9 +34,12 @@
   },
   "devDependencies": {
     "grunt": "~0.4.0",
-    "grunt-contrib-jshint": "*",
-    "grunt-bump": "*",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-bump": "~0.0.2",
     "grunt-beautify": "*"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
   },
   "keywords": ["gruntplugin", "ssh", "scp", "sftp", "remote", "exec", "rexec"]
 }
