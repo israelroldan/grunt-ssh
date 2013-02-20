@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "ssh2": "~0.1.13",
-    "grunt-lib-contrib": "~0.5.0",
     "async": "*"
   },
   "devDependencies": {

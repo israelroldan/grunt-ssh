@@ -12,13 +12,12 @@ module.exports = function (grunt) {
   grunt.util = grunt.util || grunt.utils;
 
   grunt.registerMultiTask('sftp', 'Copy files to a (remote) machine running an SSH daemon.', function () {
-    var helpers = require('grunt-lib-contrib').init(grunt);
     var utillib = require('./lib/util').init(grunt);
     var fs = require('fs');
     var async = require('async');
     var Connection = require('ssh2');
 
-    var options = helpers.options(this, {
+    var options = this.options({
       path: '',
       host: false,
       username: false,
@@ -26,9 +25,6 @@ module.exports = function (grunt) {
       port: utillib.port,
       minimatch: {}
     });
-
-    // TODO: ditch this when grunt v0.4 is released
-    this.files = this.files || helpers.normalizeMultiTaskFiles(this.data, this.target);
 
     grunt.verbose.writeflags(options, 'Options');
 
