@@ -42,7 +42,7 @@ module.exports = function (grunt) {
     c.on('ready', function () {
 
       files.forEach(function (file) {
-        srcFiles = grunt.file.expandFiles(options.minimatch, file.src);
+        srcFiles = grunt.file.expand(options.minimatch, file.src);
 
         if (srcFiles.length === 0) {
           c.end();
@@ -61,8 +61,11 @@ module.exports = function (grunt) {
           });
 
           async.forEach(srcFiles, function (srcFile, callback) {
+            var destFile = options.path + srcFile;
+            grunt.verbose.writeln('copying ' + srcFile + ' to ' + destFile);
+
             var from = fs.createReadStream(srcFile);
-            var to = sftp.createWriteStream(options.path + srcFile);
+            var to = sftp.createWriteStream(destFile);
 
             to.on('close', function () {
               callback();
