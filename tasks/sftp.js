@@ -62,7 +62,12 @@ module.exports = function (grunt) {
           });
 
           async.forEach(srcFiles, function (srcFile, callback) {
-            var destFile = options.path + srcFile.replace(options.srcBasePath, "");
+            var destFile = options.path;
+            if (srcFile.indexOf(options.srcBasePath === 0)) {
+              destFile += srcFile.replace(options.srcBasePath, "");
+            } else {
+              destFile += srcFile;
+            }
             grunt.verbose.writeln('copying ' + srcFile + ' to ' + destFile);
 
             var from = fs.createReadStream(srcFile);
