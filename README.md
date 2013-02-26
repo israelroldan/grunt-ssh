@@ -75,6 +75,11 @@ The username to authenticate as on remote system.
 
 The password to authenticate on remote system.
 
+###### privateKey ```string```
+
+A string containing the contents of the private key to use to authenticate with the remote system.
+
+
 ###### host ```string```
 
 The remote host to copy to, set up in your `~/.ssh/config`.
