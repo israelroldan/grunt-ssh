@@ -43,10 +43,18 @@ module.exports = function (grunt) {
         options: {
           host: '<%= secret.host %>',
           username: '<%= secret.username %>',
-          privateKey: grunt.file.read('/Users/marcin.szczepanski/.ssh/id_rsa'),
+          // password auth
+          password: '<%= secret.password %>'
+          // private key auth
+          /*
+          privateKey: grunt.file.read('id_rsa'),
           passphrase: '<%= secret.passphrase %>',
+          */
+          // create directories
+          /*
           path: "/tmp/does/not/exist/",
           createDirectories: true
+          */
         }
       }
     },
@@ -56,8 +64,13 @@ module.exports = function (grunt) {
         options: {
           host: '<%= secret.host %>',
           username: '<%= secret.username %>',
-          privateKey: grunt.file.read('/Users/marcin.szczepanski/.ssh/id_rsa'),
-          passphrase: '<%= secret.passphrase %>'
+          // password auth
+          password: '<%= secret.password %>'
+          // private key auth
+          /*
+          privateKey: grunt.file.read('id_rsa'),
+          passphrase: '<%= secret.passphrase %>',
+          */
         }
       }
     }
