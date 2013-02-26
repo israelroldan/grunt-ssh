@@ -36,10 +36,21 @@
     "grunt": "~0.4.0",
     "grunt-contrib-jshint": "~0.1.1",
     "grunt-bump": "~0.0.2",
-    "grunt-beautify": "*"
+    "grunt-beautify": "*",
+    "nodeunit": "~0.7.4",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "sinon": "~1.6.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.0"
   },
-  "keywords": ["gruntplugin", "ssh", "scp", "sftp", "remote", "exec", "rexec"]
+  "keywords": [
+    "gruntplugin",
+    "ssh",
+    "scp",
+    "sftp",
+    "remote",
+    "exec",
+    "rexec"
+  ]
 }
