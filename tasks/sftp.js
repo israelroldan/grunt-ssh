@@ -23,7 +23,8 @@ module.exports = function (grunt) {
       username: false,
       password: false,
       port: utillib.port,
-      minimatch: {}
+      minimatch: {},
+      srcBasePath: ""
     });
 
     grunt.verbose.writeflags(options, 'Options');
@@ -61,7 +62,7 @@ module.exports = function (grunt) {
           });
 
           async.forEach(srcFiles, function (srcFile, callback) {
-            var destFile = options.path + srcFile;
+            var destFile = options.path + srcFile.replace(options.srcBasePath, "");
             grunt.verbose.writeln('copying ' + srcFile + ' to ' + destFile);
 
             var from = fs.createReadStream(srcFile);
