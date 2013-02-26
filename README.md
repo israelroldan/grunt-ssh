@@ -1,6 +1,6 @@
 # grunt-ssh
 
-> SSH tasks for Grunt.
+> SSH and SFTP tasks for Grunt.
 
 ## Overview
 
@@ -83,6 +83,25 @@ The remote host to copy to, set up in your `~/.ssh/config`.
 
 The remote port, optional, defaults to `22`.
 
+###### srcBasePath ```string```
+
+Optionally strip off an initial part of the file when performing the SFTP operation. This is a string operation, so trailing slashes are important.
+
+For example:
+
+```js
+    /* [...] */
+    files: {
+      "./": "dist/**"
+    },
+    options: {
+      path: '/tmp/',
+      /* [...] */
+      srcBasePath: "dist/"
+```
+
+Would SFTP the files in dist directly into tmp (eg. ```dist/index.html``` ==> ```/tmp/index.html```)
+
 ### sshexec
 
 Runs a command over ssh.
@@ -114,6 +133,7 @@ The remote host to copy to, set up in your `~/.ssh/config`.
 The remote port, optional, defaults to `22`.
 
 ### Release History
+* 2013/02/26 - v0.2.1 - Add `srcBasePath` option to `sftp`. Thanks to [marcins](https://github.com/marcins).
 * 2013/02/20 - v0.2.0 - Update for grunt 0.4.x.
 * 2013/02/13 - v0.1.0 - Initial release with _sshexec_ and _sftp_ tasks.
 
