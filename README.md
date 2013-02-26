@@ -1,6 +1,6 @@
 # grunt-ssh
 
-> SSH tasks for Grunt.
+> SSH and SFTP tasks for Grunt.
 
 ## Overview
 
