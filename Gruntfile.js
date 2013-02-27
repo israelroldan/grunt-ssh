@@ -10,10 +10,10 @@ module.exports = function (grunt) {
       files: ['test/**/*.js']
     },
     beautify: {
-      files: '<config:jshint.files>'
+      files: '<%= jshint.files %>'
     },
     watch: {
-      files: '<config:jshint.files>',
+      files: '<%= jshint.files %>',
       tasks: 'default'
     },
     jshint: {

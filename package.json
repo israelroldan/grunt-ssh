@@ -36,7 +36,7 @@
     "grunt": "~0.4.0",
     "grunt-contrib-jshint": "~0.1.1",
     "grunt-bump": "~0.0.2",
-    "grunt-beautify": "*"
+    "grunt-beautify": "git://github.com/terryweiss/grunt-beautify.git#FixForGrunt040"
   },
   "peerDependencies": {
     "grunt": "~0.4.0"

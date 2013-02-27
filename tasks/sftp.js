@@ -104,13 +104,11 @@ module.exports = function (grunt) {
       username: options.username
     };
 
-    if (options.privateKey)
-    {
+    if (options.privateKey) {
       connectionOptions.privateKey = options.privateKey;
       connectionOptions.passphrase = options.passphrase;
     }
-    else
-    {
+    else {
       connectionOptions.password = options.password;
     }
 
