@@ -13,10 +13,10 @@ module.exports = function (grunt) {
       files: ['test/**/*.js']
     },
     beautify: {
-      files: '<config:jshint.files>'
+      files: '<%= jshint.files %>'
     },
     watch: {
-      files: '<config:jshint.files>',
+      files: '<%= jshint.files %>',
       tasks: 'default'
     },
     jshint: {
@@ -46,9 +46,18 @@ module.exports = function (grunt) {
         options: {
           host: '<%= secret.host %>',
           username: '<%= secret.username %>',
-          password: '<%= secret.password %>',
+          // password auth
+          password: '<%= secret.password %>'
+          // private key auth
+          /*
+          privateKey: grunt.file.read('id_rsa'),
+          passphrase: '<%= secret.passphrase %>',
+          */
+          // create directories
+          /*
           path: "/tmp/does/not/exist/",
           createDirectories: true
+          */
         }
       }
     },
@@ -58,7 +67,13 @@ module.exports = function (grunt) {
         options: {
           host: '<%= secret.host %>',
           username: '<%= secret.username %>',
+          // password auth
           password: '<%= secret.password %>'
+          // private key auth
+          /*
+          privateKey: grunt.file.read('id_rsa'),
+          passphrase: '<%= secret.passphrase %>',
+          */
         }
       }
     }
