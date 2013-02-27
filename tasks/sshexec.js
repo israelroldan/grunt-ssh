@@ -72,11 +72,21 @@ module.exports = function (grunt) {
       grunt.verbose.writeln('finishing task');
       done();
     });
-    c.connect({
+
+    var connectionOptions = {
       host: options.host,
       port: options.port,
-      username: options.username,
-      password: options.password
-    });
+      username: options.username
+    };
+
+    if (options.privateKey) {
+      connectionOptions.privateKey = options.privateKey;
+      connectionOptions.passphrase = options.passphrase;
+    }
+    else {
+      connectionOptions.password = options.password;
+    }
+
+    c.connect(connectionOptions);
   });
 };

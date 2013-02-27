@@ -75,6 +75,21 @@ The username to authenticate as on remote system.
 
 The password to authenticate on remote system.
 
+###### privateKey ```string```
+
+A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.load```. Be careful you don't put this into source control unless you mean it!
+
+```js
+options: {
+  privateKey: grunt.file.load("id_rsa"),
+  passphrase: <%= secret.passphrase %>
+}
+```
+
+###### passphrase ```string```
+
+The passphrase to use with the ```privateKey```. As per the ```privateKey```, do not expose this in your Gruntfile or anywhere that'll end up public unless you mean it, load it from an external file.
+
 ###### host ```string```
 
 The remote host to copy to, set up in your `~/.ssh/config`.
