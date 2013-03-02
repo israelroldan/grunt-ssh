@@ -148,6 +148,7 @@ The remote host to copy to, set up in your `~/.ssh/config`.
 The remote port, optional, defaults to `22`.
 
 ### Release History
+* 2013/02/27 - v0.3.0 - Support private key based authentication ([marcins](https://github.com/marcins)).
 * 2013/02/26 - v0.2.1 - Add `srcBasePath` option to `sftp`. Thanks to [marcins](https://github.com/marcins).
 * 2013/02/20 - v0.2.0 - Update for grunt 0.4.x.
 * 2013/02/13 - v0.1.0 - Initial release with _sshexec_ and _sftp_ tasks.
