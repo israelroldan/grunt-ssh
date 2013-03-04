@@ -73,7 +73,9 @@ module.exports = function (grunt) {
           var paths = [];
 
           srcFiles.forEach(function (srcFile) {
-            if (grunt.file.isDir(srcFile)) return;
+            if (grunt.file.isDir(srcFile)){
+                return;
+            }
             var destFile = options.path;
             if (srcFile.indexOf(options.srcBasePath === 0)) {
               destFile += srcFile.replace(options.srcBasePath, "");
