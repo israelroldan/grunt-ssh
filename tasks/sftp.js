@@ -73,8 +73,8 @@ module.exports = function (grunt) {
           var paths = [];
 
           srcFiles.forEach(function (srcFile) {
-            if (grunt.file.isDir(srcFile)){
-                return;
+            if (grunt.file.isDir(srcFile)) {
+              return;
             }
             var destFile = options.path;
             if (srcFile.indexOf(options.srcBasePath === 0)) {
@@ -82,7 +82,10 @@ module.exports = function (grunt) {
             } else {
               destFile += srcFile;
             }
-            fileQueue.push({src: srcFile, dest: destFile});
+            fileQueue.push({
+              src: srcFile,
+              dest: destFile
+            });
             var pathName = path.dirname(destFile);
             if (paths.indexOf(pathName) === -1) {
               paths.push(pathName);
@@ -91,25 +94,24 @@ module.exports = function (grunt) {
 
           async.eachSeries(paths, function (path, callback) {
 
-            if ( ! options.createDirectories) {
+            if (!options.createDirectories) {
               callback();
               return;
             }
 
             grunt.verbose.writeln("Checking existence of path " + path);
-            sftpHelper.sftpRecursiveMkDir(sftp, path, {permissions: options.directoryPermissions}, function (result, msg) {
-              if (!result)
-              {
+            sftpHelper.sftpRecursiveMkDir(sftp, path, {
+              permissions: options.directoryPermissions
+            }, function (result, msg) {
+              if (!result) {
                 callback(msg);
               }
-              else
-              {
+              else {
                 callback();
               }
             });
           }, function (err) {
-            if (err)
-            {
+            if (err) {
               grunt.fail.warn("Path creation failed: " + err);
               return;
             }
