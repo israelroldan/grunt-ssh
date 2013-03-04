@@ -16,6 +16,8 @@ module.exports = function (grunt) {
     var fs = require('fs');
     var async = require('async');
     var Connection = require('ssh2');
+    var path = require('path');
+    var sftpHelper = require("./lib/sftpHelpers").init(grunt);
 
     var options = this.options({
       path: '',
@@ -24,7 +26,9 @@ module.exports = function (grunt) {
       password: false,
       port: utillib.port,
       minimatch: {},
-      srcBasePath: ""
+      srcBasePath: "",
+      createDirectories: false,
+      directoryPermissions: parseInt(755, 8)
     });
 
     grunt.verbose.writeflags(options, 'Options');
@@ -61,28 +65,69 @@ module.exports = function (grunt) {
             grunt.verbose.writeln('SFTP :: close');
           });
 
-          async.forEach(srcFiles, function (srcFile, callback) {
+          // TODO - before we start copying files ensure all
+          // the directories we are copying into will exist, otherwise
+          // the async thingie causes problems
+          var fileQueue = [];
+          var functionQueue = [];
+          var paths = [];
+
+          srcFiles.forEach(function (srcFile) {
+            if (grunt.file.isDir(srcFile)) return;
             var destFile = options.path;
             if (srcFile.indexOf(options.srcBasePath === 0)) {
               destFile += srcFile.replace(options.srcBasePath, "");
             } else {
               destFile += srcFile;
             }
-            grunt.verbose.writeln('copying ' + srcFile + ' to ' + destFile);
-
-            var from = fs.createReadStream(srcFile);
-            var to = sftp.createWriteStream(destFile);
-
-            to.on('close', function () {
-              callback();
-            });
-
-            from.pipe(to);
-          }, function (err) {
-            sftp.end();
-            c.end();
+            fileQueue.push({src: srcFile, dest: destFile});
+            var pathName = path.dirname(destFile);
+            if (paths.indexOf(pathName) === -1) {
+              paths.push(pathName);
+            }
           });
 
+          async.eachSeries(paths, function (path, callback) {
+
+            if ( ! options.createDirectories) {
+              callback();
+              return;
+            }
+
+            grunt.verbose.writeln("Checking existence of path " + path);
+            sftpHelper.sftpRecursiveMkDir(sftp, path, {permissions: options.directoryPermissions}, function (result, msg) {
+              if (!result)
+              {
+                callback(msg);
+              }
+              else
+              {
+                callback();
+              }
+            });
+          }, function (err) {
+            if (err)
+            {
+              grunt.fail.warn("Path creation failed: " + err);
+              return;
+            }
+
+            async.each(fileQueue, function (file, callback) {
+              grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
+
+              var from = fs.createReadStream(file.src);
+              var to = sftp.createWriteStream(file.dest);
+
+              to.on('close', function () {
+                callback();
+              });
+
+              from.pipe(to);
+            }, function (err) {
+              sftp.end();
+              c.end();
+            });
+          });
         });
       });
 

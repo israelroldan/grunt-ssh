@@ -9,6 +9,9 @@ module.exports = function (grunt) {
     test: {
       files: ['test/**/*.js']
     },
+    nodeunit: {
+      files: ['test/**/*.js']
+    },
     beautify: {
       files: '<%= jshint.files %>'
     },
@@ -38,7 +41,7 @@ module.exports = function (grunt) {
     sftp: {
       test: {
         files: {
-          "./": "*json"
+          "./": "tasks/**/*.js"
         },
         options: {
           host: '<%= secret.host %>',
@@ -82,9 +85,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-beautify');
   grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Default task.
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint','nodeunit']);
 
   grunt.registerTask('tidy', ['beautify']);
 

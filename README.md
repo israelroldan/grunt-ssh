@@ -117,6 +117,20 @@ For example:
 
 Would SFTP the files in dist directly into tmp (eg. ```dist/index.html``` ==> ```/tmp/index.html```)
 
+###### createDirectories ```boolean```
+
+Optionally check whether the directories files will be sftp'd to exist first. This can take a bit of extra time as directories need to be checked, so this option is disabled by default.
+
+See also the ```directoryPermissions``` option.
+
+###### directoryPermissions ```number```
+
+The permissions to apply to directories created with createDirectories.  The default is 0755.  JSHint will probably yell at you unless you set this using ```parseInt```:
+
+```js
+directoryPermissions: parseInt(755, 8)
+```
+
 ### sshexec
 
 Runs a command over ssh.
