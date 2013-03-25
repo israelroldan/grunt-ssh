@@ -1,8 +1,11 @@
 *~
 .*redcar/
+*.swp
 build
 dist
 .DS_Store
+.exrc
+_exrc
 node_modules
 npm-debug.log
 secret.json

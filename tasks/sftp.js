@@ -34,8 +34,6 @@ module.exports = function (grunt) {
     grunt.verbose.writeflags(options, 'Options');
 
     var files = this.files;
-    var srcFiles;
-    var srcFile;
 
     var c = new Connection();
     var done = this.async();
@@ -47,7 +45,7 @@ module.exports = function (grunt) {
     c.on('ready', function () {
 
       files.forEach(function (file) {
-        srcFiles = grunt.file.expand(options.minimatch, file.src);
+        var srcFiles = grunt.file.expand(options.minimatch, file.src);
 
         if (srcFiles.length === 0) {
           c.end();
