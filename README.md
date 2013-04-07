@@ -77,11 +77,11 @@ The password to authenticate on remote system.
 
 ###### privateKey ```string```
 
-A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.load```. Be careful you don't put this into source control unless you mean it!
+A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
 
 ```js
 options: {
-  privateKey: grunt.file.load("id_rsa"),
+  privateKey: grunt.file.read("id_rsa"),
   passphrase: <%= secret.passphrase %>
 }
 ```
