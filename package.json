@@ -33,7 +33,8 @@
     "async": "*"
   },
   "devDependencies": {
-    "grunt": "~0.4.0",
+    "grunt": "~0.4",
+    "grunt-cli": "~0.1",
     "grunt-contrib-jshint": "~0.1.1",
     "grunt-bump": "~0.0.2",
     "nodeunit": "~0.7.4",
