@@ -1,5 +1,7 @@
 # grunt-ssh
 
+[![NPM version](https://badge.fury.io/js/grunt-ssh.png)](http://badge.fury.io/js/grunt-ssh)
+
 > SSH and SFTP tasks for Grunt.
 
 ## Overview
