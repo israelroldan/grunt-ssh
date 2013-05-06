@@ -114,7 +114,7 @@ module.exports = function (grunt) {
               return;
             }
 
-            async.each(fileQueue, function (file, callback) {
+            async.eachSeries(fileQueue, function (file, callback) {
               grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
 
               var from = fs.createReadStream(file.src);
