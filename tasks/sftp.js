@@ -133,7 +133,7 @@ module.exports = function (grunt) {
             });
           });
         });
-      }, function(err) {
+      }, function (err) {
         if (err) {
           grunt.log.error(err);
         }
@@ -172,4 +172,3 @@ module.exports = function (grunt) {
     c.connect(connectionOptions);
   });
 };
-
