@@ -44,23 +44,25 @@ module.exports = function (grunt) {
 
     c.on('ready', function () {
 
-      files.forEach(function (file) {
+      async.eachSeries(files, function (file, callback) {
         var srcFiles = grunt.file.expand(options.minimatch, file.src);
 
         if (srcFiles.length === 0) {
-          c.end();
-          grunt.fail.warn('Unable to copy; no valid source files were found.');
+          return callback('Unable to copy; no valid source files were found.');
         }
 
         c.sftp(function (err, sftp) {
           if (err) {
-            throw err;
+            return callback(err);
           }
           sftp.on('end', function () {
             grunt.verbose.writeln('SFTP :: SFTP session closed');
           });
-          sftp.on('close', function () {
+          sftp.on('close', function (had_error) {
             grunt.verbose.writeln('SFTP :: close');
+            if (had_error) {
+              return callback(had_error);
+            }
           });
 
           // TODO - before we start copying files ensure all
@@ -110,37 +112,45 @@ module.exports = function (grunt) {
             });
           }, function (err) {
             if (err) {
-              grunt.fail.warn("Path creation failed: " + err);
+              callback("Path creation failed: " + err);
               return;
             }
 
-            async.each(fileQueue, function (file, callback) {
-              grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
-
+            async.eachSeries(fileQueue, function (file, callback) {
               var from = fs.createReadStream(file.src);
               var to = sftp.createWriteStream(file.dest);
 
               to.on('close', function () {
+                grunt.verbose.writeln('copied ' + file.src + ' to ' + file.dest);
                 callback();
               });
 
+              grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
               from.pipe(to);
             }, function (err) {
               sftp.end();
-              c.end();
+              callback(err);
             });
           });
         });
+      }, function(err) {
+        if (err) {
+          grunt.log.error(err);
+        }
+        c.end();
       });
 
     });
     c.on('error', function (err) {
-      grunt.fail.warn('Connection :: error :: ' + err);
+      grunt.log.error('Connection :: error :: ' + err);
     });
     c.on('end', function () {
       grunt.verbose.writeln('Connection :: end');
     });
     c.on('close', function (had_error) {
+      if (had_error) {
+        grunt.log.error(had_error);
+      }
       grunt.verbose.writeln('Connection :: close');
       done();
     });
@@ -162,3 +172,4 @@ module.exports = function (grunt) {
     c.connect(connectionOptions);
   });
 };
+
