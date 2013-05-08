@@ -117,16 +117,14 @@ module.exports = function (grunt) {
             }
 
             async.eachSeries(fileQueue, function (file, callback) {
-              var from = fs.createReadStream(file.src);
-              var to = sftp.createWriteStream(file.dest);
-
-              to.on('close', function () {
+              grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
+              sftp.fastPut(file.src, file.dest, function (err) {
+                if (err) {
+                  return callback(err);
+                }
                 grunt.verbose.writeln('copied ' + file.src + ' to ' + file.dest);
                 callback();
               });
-
-              grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
-              from.pipe(to);
             }, function (err) {
               sftp.end();
               callback(err);
