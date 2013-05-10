@@ -23,12 +23,22 @@ module.exports = function (grunt) {
     var command = utillib.validateStringAndProcess('command', this.data.command);
 
     var options = this.options({
+      config: false,
       host: false,
       username: false,
       password: false,
       port: utillib.port,
       minimatch: {}
     });
+
+    var rawOptions = this.options();
+    grunt.verbose.writeflags(rawOptions, 'Raw Options');
+
+    if (options.config && grunt.util._(options.config).isString()) {
+      this.requiresConfig(['sshconfig', options.config]);
+      var configOptions = grunt.config.get(['sshconfig', options.config]);
+      options = grunt.util._.extend(configOptions, rawOptions);
+    }
 
     grunt.verbose.writeflags(options, 'Options');
 
