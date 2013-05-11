@@ -194,6 +194,7 @@ The remote host to copy to, set up in your `~/.ssh/config`.
 The remote port, optional, defaults to `22`.
 
 ### Release History
+* 2013/05/11 - v0.4.0 - Support defining and referencing ssh configurations. ([Anders Johnson](http://andrz.me/)).
 * 2013/05/07 - v0.3.3 - Fix encoding issues. ([John Wright](https://github.com/johngeorgewright)).
 * 2013/05/07 - v0.3.2 - Fix race condition when uploading larger files. ([John Wright](https://github.com/johngeorgewright)).
 * 2013/03/25 - v0.3.1 - Fix race condition when uploading multiple files. ([John Wright](https://github.com/johngeorgewright)).
