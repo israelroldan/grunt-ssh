@@ -46,6 +46,35 @@ sshexec: {
 }
 ```
 
+Or, specifying SSH configurations for re-use, and referencing from tasks:
+
+```js
+// don't keep passwords in source control
+sshconfig: {
+  "myhost": grunt.file.readJSON('myhost.json')
+},
+sshexec: {
+  test: {
+    command: 'uptime',
+    options: {
+      config: 'myhost'
+    }
+  },
+  ls: {
+    command: 'ls -la',
+    options: {
+      config: 'myhost'
+    }
+  }
+}
+```
+
+Or, specifying SSH configuration at runtime as a command line option:
+
+```sh
+$ grunt sshexec:someTask --config myhost
+```
+
 ## Description
 
 ### sftp
