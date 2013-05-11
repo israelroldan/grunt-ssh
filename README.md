@@ -69,6 +69,12 @@ sshexec: {
 }
 ```
 
+Or, specifying SSH configuration at runtime as a command line option:
+
+```sh
+$ grunt sshexec:someTask --config myhost
+```
+
 ## Description
 
 ### sftp

@@ -33,6 +33,11 @@ module.exports = function (grunt) {
 
     var rawOptions = this.options();
     grunt.verbose.writeflags(rawOptions, 'Raw Options');
+    
+    var config;
+    if ( (! options.config) && (config = grunt.option('config'))) {
+      options.config = config;
+    }
 
     if (options.config && grunt.util._(options.config).isString()) {
       this.requiresConfig(['sshconfig', options.config]);
