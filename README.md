@@ -171,9 +171,9 @@ Inside your `grunt.js` file add a section named `sshexec`.
 
 #### Parameters
 
-##### command ```string```
+##### command ```string``` or ```array```
 
-The command to run.
+The command or commands to run, if an array is supplied, all the commands are executed on the same connection.
 
 ##### options ```object```
 
@@ -192,6 +192,10 @@ The remote host to copy to, set up in your `~/.ssh/config`.
 ###### port ```number```
 
 The remote port, optional, defaults to `22`.
+
+###### ignoreErrors ```boolean```
+
+Determins if the task should stop or continue if any of the commands returns a code other than 0. Disabled by default.
 
 ### Release History
 * 2013/05/11 - v0.4.0 - Support defining and referencing ssh configurations. ([Anders Johnson](http://andrz.me/)).

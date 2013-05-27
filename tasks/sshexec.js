@@ -28,7 +28,7 @@ module.exports = function (grunt) {
       username: false,
       password: false,
       port: utillib.port,
-      exitonfail: true,
+      ignoreErrors: false,
       minimatch: {}
     });
 
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
           });
           stream.on('exit', function (code, signal) {
             grunt.verbose.writeln('Stream :: exit :: code: ' + code + ', signal: ' + signal);
-            if(options.exitonfail && code !== 0) {
+            if(!options.ignoreErrors && code !== 0) {
 				grunt.fail.warn('Error executing task ' + command);
 				c.end();
             } else {
