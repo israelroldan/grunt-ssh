@@ -198,6 +198,7 @@ The remote port, optional, defaults to `22`.
 Determins if the task should stop or continue if any of the commands returns a code other than 0. Disabled by default.
 
 ### Release History
+* 2013/06/02 - v0.5.0 - Add support for multiple comands ([Andrew Stewart](https://github.com/andysprout)).
 * 2013/05/11 - v0.4.0 - Support defining and referencing ssh configurations. ([Anders Johnson](http://andrz.me/)).
 * 2013/05/07 - v0.3.3 - Fix encoding issues. ([John Wright](https://github.com/johngeorgewright)).
 * 2013/05/07 - v0.3.2 - Fix race condition when uploading larger files. ([John Wright](https://github.com/johngeorgewright)).
