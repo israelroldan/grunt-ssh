@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 
     var done = this.async();
 
-    var command = utillib.validateStringAndProcess('command', this.data.command);
+    var commands = utillib.validateStringArrayAndProcess('command', this.data.command);
 
     var options = this.options({
       config: false,
@@ -28,12 +28,13 @@ module.exports = function (grunt) {
       username: false,
       password: false,
       port: utillib.port,
+      ignoreErrors: false,
       minimatch: {}
     });
 
     var rawOptions = this.options();
     grunt.verbose.writeflags(rawOptions, 'Raw Options');
-    
+
     var config;
     if ( (! options.config) && (config = grunt.option('config'))) {
       options.config = config;
@@ -52,29 +53,7 @@ module.exports = function (grunt) {
     });
     c.on('ready', function () {
       grunt.verbose.writeln('Connection :: ready');
-      c.exec(command, function (err, stream) {
-        if (err) {
-          throw err;
-        }
-        stream.on('data', function (data, extended) {
-          var out = String(data);
-          if (extended === 'stderr') {
-            grunt.log.warn(out);
-          } else {
-            grunt.log.write(out);
-          }
-        });
-        stream.on('end', function () {
-          grunt.verbose.writeln('Stream :: EOF');
-        });
-        stream.on('close', function () {
-          grunt.verbose.writeln('Stream :: close');
-        });
-        stream.on('exit', function (code, signal) {
-          grunt.verbose.writeln('Stream :: exit :: code: ' + code + ', signal: ' + signal);
-          c.end();
-        });
-      });
+      execCommand();
     });
     c.on('error', function (err) {
       grunt.fail.warn('Connection :: error :: ' + err);
@@ -87,6 +66,43 @@ module.exports = function (grunt) {
       grunt.verbose.writeln('finishing task');
       done();
     });
+
+    function execCommand() {
+      if(commands.length === 0) {
+        c.end();
+      } else {
+        var command = commands.shift();
+        grunt.verbose.writeln('Executing :: ' + command);
+        c.exec(command, function (err, stream) {
+          if (err) {
+            throw err;
+          }
+          stream.on('data', function (data, extended) {
+            var out = String(data);
+            if (extended === 'stderr') {
+              grunt.log.warn(out);
+            } else {
+              grunt.log.write(out);
+            }
+          });
+          stream.on('end', function () {
+            grunt.verbose.writeln('Stream :: EOF');
+          });
+          stream.on('close', function () {
+            grunt.verbose.writeln('Stream :: close');
+          });
+          stream.on('exit', function (code, signal) {
+            grunt.verbose.writeln('Stream :: exit :: code: ' + code + ', signal: ' + signal);
+            if(!options.ignoreErrors && code !== 0) {
+				grunt.fail.warn('Error executing task ' + command);
+				c.end();
+            } else {
+				execCommand();
+			}
+          });
+        });
+      }
+    }
 
     var connectionOptions = {
       host: options.host,
