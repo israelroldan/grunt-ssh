@@ -36,7 +36,7 @@ module.exports = function (grunt) {
     grunt.verbose.writeflags(rawOptions, 'Raw Options');
 
     var config;
-    if ( (! options.config) && (config = grunt.option('config'))) {
+    if ((!options.config) && (config = grunt.option('config'))) {
       options.config = config;
     }
 
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
     });
 
     function execCommand() {
-      if(commands.length === 0) {
+      if (commands.length === 0) {
         c.end();
       } else {
         var command = commands.shift();
@@ -93,12 +93,12 @@ module.exports = function (grunt) {
           });
           stream.on('exit', function (code, signal) {
             grunt.verbose.writeln('Stream :: exit :: code: ' + code + ', signal: ' + signal);
-            if(!options.ignoreErrors && code !== 0) {
-				grunt.fail.warn('Error executing task ' + command);
-				c.end();
+            if (!options.ignoreErrors && code !== 0) {
+              grunt.fail.warn('Error executing task ' + command);
+              c.end();
             } else {
-				execCommand();
-			}
+              execCommand();
+            }
           });
         });
       }

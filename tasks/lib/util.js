@@ -34,20 +34,20 @@ exports.init = function (grunt) {
   };
 
   exports.validateStringArrayAndProcess = function (name, strings) {
-    if(!strings) {
+    if (!strings) {
       grunt.warn('Missing ' + name + ' property.');
       return false;
     }
-    if(grunt.util._.isFunction(strings)) {
+    if (grunt.util._.isFunction(strings)) {
       strings = strings(grunt);
     }
-    if(grunt.util._(strings).isString()) {
+    if (grunt.util._(strings).isString()) {
       return [grunt.template.process(strings)];
-    } else if(grunt.util._(strings).isArray()) {
+    } else if (grunt.util._(strings).isArray()) {
       var processed = [];
-      for(var i=0; i<strings.length; i++) {
+      for (var i = 0; i < strings.length; i++) {
         var string = strings[i];
-        if(!grunt.util._(string).isString()) {
+        if (!grunt.util._(string).isString()) {
           grunt.warn('The ' + name + ' property must be a string or array of strings.');
           processed = false;
           break;
