@@ -77,7 +77,7 @@ module.exports = function (grunt) {
               return;
             }
             var destFile = options.path;
-            if (srcFile.indexOf(options.srcBasePath === 0)) {
+            if (srcFile.indexOf(options.srcBasePath) === 0) {
               destFile += srcFile.replace(options.srcBasePath, "");
             } else {
               destFile += srcFile;
