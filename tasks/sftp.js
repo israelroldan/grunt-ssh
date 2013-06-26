@@ -24,6 +24,7 @@ module.exports = function (grunt) {
       host: false,
       username: false,
       password: false,
+      agent: "",
       port: utillib.port,
       minimatch: {},
       srcBasePath: "",
@@ -163,8 +164,10 @@ module.exports = function (grunt) {
       connectionOptions.privateKey = options.privateKey;
       connectionOptions.passphrase = options.passphrase;
     }
-    else {
+    else if (options.password) {
       connectionOptions.password = options.password;
+    } else {
+      connectionOptions.agent = options.agent;
     }
 
     c.connect(connectionOptions);
