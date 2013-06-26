@@ -107,6 +107,10 @@ The username to authenticate as on remote system.
 
 The password to authenticate on remote system.
 
+###### agent ```string```
+
+Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
+
 ###### privateKey ```string```
 
 A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
@@ -198,6 +202,7 @@ The remote port, optional, defaults to `22`.
 Determins if the task should stop or continue if any of the commands returns a code other than 0. Disabled by default.
 
 ### Release History
+* 2013/06/26 - v0.6.0 - Ability to supply a path to ssh-agent's UNIX socket for ssh-agent-based user authentication ([Justin Kulesza](https://github.com/kuleszaj)).
 * 2013/06/25 - v0.5.1 - Fix `srcBasePath` ([owenmead](https://github.com/owenmead)).
 * 2013/06/02 - v0.5.0 - Add support for multiple comands ([Andrew Stewart](https://github.com/andysprout)).
 * 2013/05/11 - v0.4.0 - Support defining and referencing ssh configurations. ([Anders Johnson](http://andrz.me/)).
