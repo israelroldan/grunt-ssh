@@ -1,7 +1,10 @@
 module.exports = function (grunt) {
   'use strict';
 
-  var secret = grunt.file.readJSON('secret.json');
+  var secret = {};
+  try {
+    secret = grunt.file.readJSON('secret.json');
+  } catch (err) {}
 
   // Project configuration.
   grunt.initConfig({
@@ -73,7 +76,7 @@ module.exports = function (grunt) {
           host: secret.host,
           username: secret.username,
           // private key auth
-          privateKey: grunt.file.read(secret.privateKeyPath),
+          //privateKey: grunt.file.read(secret.privateKeyPath),
           passphrase: secret.passphrase
         }
       }
