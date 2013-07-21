@@ -83,8 +83,8 @@ exports.init = function (grunt) {
     };
 
     if (options.privateKey) {
-      connectionOptions.privateKey = options.privateKey;
-      connectionOptions.passphrase = options.passphrase;
+      connectionOptions.privateKey = options.privateKey.trim();
+      connectionOptions.passphrase = options.passphrase.trim();
     }
     else if (options.password) {
       connectionOptions.password = options.password;
