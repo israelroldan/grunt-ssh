@@ -1,6 +1,6 @@
 /*
  * grunt-ssh
- * https://github.com/ajones/grunt-ssh
+ * https://github.com/andrewrjones/grunt-ssh
  *
  * Copyright (c) 2013 Andrew Jones
  * Licensed under the MIT license.
