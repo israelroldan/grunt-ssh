@@ -1,11 +1,13 @@
 module.exports = function (grunt) {
   'use strict';
 
+  var secret = grunt.file.readJSON('secret.json');
+
   // Project configuration.
   grunt.initConfig({
     // secret.json contains the host, username and password for a server to
     // run the tests on.
-    secret: grunt.file.readJSON('secret.json'),
+    secret: secret,
     test: {
       files: ['test/**/*.js']
     },
@@ -36,7 +38,7 @@ module.exports = function (grunt) {
           exports: true
         }
       },
-      files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
+      files: ['Gruntfile.js', 'tasks/**/*.js', 'test/**/*.js']
     },
     sftp: {
       test: {
@@ -49,12 +51,12 @@ module.exports = function (grunt) {
           // password auth
           password: '<%= secret.password %>'
           // private key auth
-          /*
+/*
           privateKey: grunt.file.read('id_rsa'),
           passphrase: '<%= secret.passphrase %>',
           */
           // create directories
-          /*
+/*
           path: "/tmp/does/not/exist/",
           createDirectories: true
           */
@@ -68,15 +70,11 @@ module.exports = function (grunt) {
         // multiple commands
         command: ['uptime', 'ls', 'uptime'],
         options: {
-          host: '<%= secret.host %>',
-          username: '<%= secret.username %>',
-          // password auth
-          password: '<%= secret.password %>'
+          host: secret.host,
+          username: secret.username,
           // private key auth
-          /*
-          privateKey: grunt.file.read('id_rsa'),
-          passphrase: '<%= secret.passphrase %>',
-          */
+          privateKey: grunt.file.read(secret.privateKeyPath),
+          passphrase: secret.passphrase
         }
       }
     }
@@ -91,7 +89,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Default task.
-  grunt.registerTask('default', ['jshint','nodeunit']);
+  grunt.registerTask('default', ['jshint', 'nodeunit']);
 
   grunt.registerTask('tidy', ['beautify']);
 
