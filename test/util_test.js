@@ -36,6 +36,79 @@ module.exports = {
     grunt.config.data = this.origData;
     callback();
   },
+  parseConnectionOptions_password: function (test) {
+    'use strict';
+    var connectionOptions = {},
+        options = {};
+
+    options = {
+      host: 'localhost',
+      port: 22,
+      username: 'andrewrjones',
+      password: 'andrewrjones'
+    };
+
+    connectionOptions = util.parseConnectionOptions(options);
+
+    test.equal(options.host, connectionOptions.host, 'host');
+    test.equal(options.port, connectionOptions.port, 'port');
+    test.equal(options.username, connectionOptions.username, 'username');
+    test.equal(options.password, connectionOptions.password, 'password');
+    test.ok(!connectionOptions.privateKey, 'no private key');
+    test.ok(!connectionOptions.passphrase, 'no passphrase');
+    test.ok(!connectionOptions.agent, 'no agent');
+
+    test.done();
+  },
+  parseConnectionOptions_privateKey: function (test) {
+    'use strict';
+    var connectionOptions = {},
+        options = {};
+
+    options = {
+      host: 'localhost',
+      port: 22,
+      username: 'andrewrjones',
+      privateKey: '12345',
+      passphrase: 'andrewrjones'
+    };
+
+    connectionOptions = util.parseConnectionOptions(options);
+
+    test.equal(options.host, connectionOptions.host, 'host');
+    test.equal(options.port, connectionOptions.port, 'port');
+    test.equal(options.username, connectionOptions.username, 'username');
+    test.equal(options.privateKey, connectionOptions.privateKey, 'privateKey');
+    test.equal(options.passphrase, connectionOptions.passphrase, 'passphrase');
+    test.ok(!connectionOptions.password, 'no password');
+    test.ok(!connectionOptions.agent, 'no agent');
+
+    test.done();
+  },
+  parseConnectionOptions_agent: function (test) {
+    'use strict';
+    var connectionOptions = {},
+        options = {};
+
+    options = {
+      host: 'localhost',
+      port: 22,
+      username: 'andrewrjones',
+      agent: 'foo'
+    };
+
+    connectionOptions = util.parseConnectionOptions(options);
+
+    test.equal(options.host, connectionOptions.host, 'host');
+    test.equal(options.port, connectionOptions.port, 'port');
+    test.equal(options.username, connectionOptions.username, 'username');
+    test.equal(options.agent, connectionOptions.agent, 'agent');
+    test.ok(!connectionOptions.privateKey, 'no private key');
+    test.ok(!connectionOptions.passphrase, 'no passphrase');
+    test.ok(!connectionOptions.password, 'no password');
+
+    test.done();
+  },
   validateString: function (test) {
     'use strict';
 

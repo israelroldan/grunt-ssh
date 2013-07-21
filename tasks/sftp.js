@@ -154,22 +154,7 @@ module.exports = function (grunt) {
       done();
     });
 
-    var connectionOptions = {
-      host: options.host,
-      port: options.port,
-      username: options.username
-    };
-
-    if (options.privateKey) {
-      connectionOptions.privateKey = options.privateKey;
-      connectionOptions.passphrase = options.passphrase;
-    }
-    else if (options.password) {
-      connectionOptions.password = options.password;
-    } else {
-      connectionOptions.agent = options.agent;
-    }
-
+    var connectionOptions = utillib.parseConnectionOptions(options);
     c.connect(connectionOptions);
   });
 };
