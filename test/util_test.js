@@ -85,6 +85,30 @@ module.exports = {
 
     test.done();
   },
+  parseConnectionOptions_privateKey_noPassphrase: function (test) {
+    'use strict';
+    var connectionOptions = {},
+        options = {};
+
+    options = {
+      host: 'localhost',
+      port: 22,
+      username: 'andrewrjones',
+      privateKey: '12345'
+    };
+
+    connectionOptions = util.parseConnectionOptions(options);
+
+    test.equal(options.host, connectionOptions.host, 'host');
+    test.equal(options.port, connectionOptions.port, 'port');
+    test.equal(options.username, connectionOptions.username, 'username');
+    test.equal(options.privateKey, connectionOptions.privateKey, 'privateKey');
+    test.ok(!options.passphrase, 'no passphrase');
+    test.ok(!connectionOptions.password, 'no password');
+    test.ok(!connectionOptions.agent, 'no agent');
+
+    test.done();
+  },
   parseConnectionOptions_agent: function (test) {
     'use strict';
     var connectionOptions = {},
