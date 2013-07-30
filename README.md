@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/andrewrjones/grunt-ssh.png?branch=master)](https://travis-ci.org/andrewrjones/grunt-ssh)
 [![NPM version](https://badge.fury.io/js/grunt-ssh.png)](http://badge.fury.io/js/grunt-ssh)
+![Dependencies](https://david-dm.org/andrewrjones/grunt-ssh.png)
 
 > SSH and SFTP tasks for Grunt.
 
