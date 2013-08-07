@@ -33,8 +33,7 @@ module.exports = function (grunt) {
       minimatch: {}
     });
 
-    var rawOptions = this.options();
-    grunt.verbose.writeflags(rawOptions, 'Raw Options');
+    grunt.verbose.writeflags(options, 'Raw Options');
 
     var config;
     if ((!options.config) && (config = grunt.option('config'))) {
@@ -44,7 +43,7 @@ module.exports = function (grunt) {
     if (options.config && grunt.util._(options.config).isString()) {
       this.requiresConfig(['sshconfig', options.config]);
       var configOptions = grunt.config.get(['sshconfig', options.config]);
-      options = grunt.util._.extend(configOptions, rawOptions);
+      options = grunt.util._.extend(options, configOptions);
     }
 
     grunt.verbose.writeflags(options, 'Options');

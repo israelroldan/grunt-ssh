@@ -32,6 +32,19 @@ module.exports = function (grunt) {
       directoryPermissions: parseInt(755, 8)
     });
 
+    grunt.verbose.writeflags(options, 'Raw Options');
+
+    var config;
+    if ((!options.config) && (config = grunt.option('config'))) {
+      options.config = config;
+    }
+
+    if (options.config && grunt.util._(options.config).isString()) {
+      this.requiresConfig(['sshconfig', options.config]);
+      var configOptions = grunt.config.get(['sshconfig', options.config]);
+      options = grunt.util._.extend(options, configOptions);
+    }
+
     grunt.verbose.writeflags(options, 'Options');
 
     var files = this.files;
