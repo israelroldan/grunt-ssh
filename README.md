@@ -241,6 +241,6 @@ Determins if the task should stop or continue if any of the commands returns a c
 * 2013/02/20 - v0.2.0 - Update for grunt 0.4.x.
 * 2013/02/13 - v0.1.0 - Initial release with _sshexec_ and _sftp_ tasks.
 
-### License
+## License
 Copyright (c) 2013 [Andrew Jones](http://andrew-jones.com)
 Licensed under the MIT license.
