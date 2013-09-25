@@ -190,6 +190,25 @@ The username to authenticate as on remote system.
 
 The password to authenticate on remote system.
 
+###### agent ```string```
+
+Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
+
+###### privateKey ```string```
+
+A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
+
+```js
+options: {
+  privateKey: grunt.file.read("id_rsa"),
+  passphrase: <%= secret.passphrase %>
+}
+```
+
+###### passphrase ```string```
+
+The passphrase to use with the ```privateKey```. As per the ```privateKey```, do not expose this in your Gruntfile or anywhere that'll end up public unless you mean it, load it from an external file.
+
 ###### host ```string```
 
 The remote host to copy to, set up in your `~/.ssh/config`.
@@ -203,7 +222,7 @@ The remote port, optional, defaults to `22`.
 Determins if the task should stop or continue if any of the commands returns a code other than 0. Disabled by default.
 
 ### Release History
-* 2013/09/25 - v0.6.2 - Allow sftp task to use the shared sshconfig; Allow overriding sshconfig properties in the task config ([Andy Royle](https://github.com/andyroyle)).
+* 2013/09/25 - v0.6.2 - Allow sftp task to use the shared sshconfig; Allow overriding sshconfig properties in the task config ([Andy Royle](https://github.com/andyroyle)). Document using the private key with `sshexec`.
 * 2013/07/25 - v0.6.2 - Fix error when no passphrase is provided ([James Wyse](https://github.com/jameswyse)).
 * 2013/07/21 - v0.6.1 - `trim` options that may be read from files; Allow `sshexec` to use ssh-agent-based user authentication ([Andy Shinn](https://github.com/andyshinn)).
 * 2013/06/26 - v0.6.0 - Ability to supply a path to ssh-agent's UNIX socket for ssh-agent-based user authentication ([Justin Kulesza](https://github.com/kuleszaj)).
