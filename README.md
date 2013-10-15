@@ -47,6 +47,16 @@ sshexec: {
 }
 ```
 
+An example `secret.json` might look like:
+
+```js
+{
+    "host" : "myhost",
+    "username" : "andrewrjones",
+    "password" : "**************"
+}
+```
+
 Or, specifying SSH configurations for re-use, and referencing from tasks:
 
 ```js
