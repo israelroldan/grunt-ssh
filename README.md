@@ -100,6 +100,24 @@ Inside your `grunt.js` file add a section named `sftp`.
 
 The files to copy. Should contain key:value pairs.
 
+If you would like to upload multiple files, use an array. For example:
+
+```js
+files: {
+  "./": ["<%= dirs.css %>style.css","<%= dirs.css %>login.css","<%= dirs.css %>print.css"]
+},
+```
+
+The following will __not__ work:
+
+```js
+files: {
+  "./": "<%= dirs.css %>style.css",
+  "./": "<%= dirs.css %>login.css",
+  "./": "<%= dirs.css %>print.css"
+},
+```
+
 ##### options ```object```
 
 ###### path ```string```
