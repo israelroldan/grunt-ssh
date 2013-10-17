@@ -34,11 +34,11 @@ module.exports = function (grunt) {
 
     grunt.verbose.writeflags(options, 'Raw Options');
 
-    function setOption(optionName){
+    function setOption(optionName) {
       var option;
-        if ((!options[optionName]) && (option = grunt.option(optionName))) {
-          options[optionName] = option;
-        }
+      if ((!options[optionName]) && (option = grunt.option(optionName))) {
+        options[optionName] = option;
+      }
     }
     setOption('config');
 
