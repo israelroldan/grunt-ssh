@@ -35,16 +35,22 @@ module.exports = function (grunt) {
 
     grunt.verbose.writeflags(options, 'Raw Options');
 
-    var config;
-    if ((!options.config) && (config = grunt.option('config'))) {
-      options.config = config;
+    function setOption(optionName){
+      var option;
+        if ((!options[optionName]) && (option = grunt.option(optionName))) {
+          options[optionName] = option;
+        }
     }
+    setOption('config');
 
     if (options.config && grunt.util._(options.config).isString()) {
       this.requiresConfig(['sshconfig', options.config]);
       var configOptions = grunt.config.get(['sshconfig', options.config]);
       options = grunt.util._.extend(options, configOptions);
     }
+
+    setOption('username');
+    setOption('password');
 
     grunt.verbose.writeflags(options, 'Options');
 
@@ -66,6 +72,7 @@ module.exports = function (grunt) {
       grunt.verbose.writeln('finishing task');
       done();
     });
+
 
     function execCommand() {
       if (commands.length === 0) {
