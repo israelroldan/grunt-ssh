@@ -80,10 +80,10 @@ sshexec: {
 }
 ```
 
-Or, specifying SSH configuration at runtime as a command line option:
+You can also overwrite the `username`, `password`, `passphrase` or `config` at runtime as a command line option:
 
 ```sh
-$ grunt sshexec:someTask --config myhost
+$ grunt sshexec:someTask --config myhost --username foo
 ```
 
 ## Description
@@ -254,6 +254,7 @@ Determins if the task should stop or continue if any of the commands returns a c
 * To see the output of your `sshexec` command, use the `--verbose` flag.
 
 ## Release History
+* 2013/10/17 - v0.7.0 - [#32:](https://github.com/andrewrjones/grunt-ssh/pull/32) Added command line options for username, password and passphrase ([David J. Bradshaw](https://github.com/davidjbradshaw)). Doc updates.
 * 2013/09/25 - v0.6.2 - Allow sftp task to use the shared sshconfig; Allow overriding sshconfig properties in the task config ([Andy Royle](https://github.com/andyroyle)). Document using the private key with `sshexec`.
 * 2013/07/25 - v0.6.2 - Fix error when no passphrase is provided ([James Wyse](https://github.com/jameswyse)).
 * 2013/07/21 - v0.6.1 - `trim` options that may be read from files; Allow `sshexec` to use ssh-agent-based user authentication ([Andy Shinn](https://github.com/andyshinn)).
