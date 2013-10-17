@@ -51,6 +51,7 @@ module.exports = function (grunt) {
 
     setOption('username');
     setOption('password');
+    setOption('passphrase');
 
     grunt.verbose.writeflags(options, 'Options');
 
