@@ -30,7 +30,8 @@ module.exports = function (grunt) {
       agent: "",
       port: utillib.port,
       ignoreErrors: false,
-      minimatch: {}
+      minimatch: {},
+      suppressRemoteErrors: false
     });
 
     grunt.verbose.writeflags(options, 'Raw Options');
@@ -87,8 +88,8 @@ module.exports = function (grunt) {
           }
           stream.on('data', function (data, extended) {
             var out = String(data);
-            if (extended === 'stderr') {
-              grunt.log.warn(out);
+            if (extended === 'stderr' ) {
+              if (!options.suppressRemoteErrors) grunt.log.warn(out);
             } else {
               grunt.log.write(out);
             }
