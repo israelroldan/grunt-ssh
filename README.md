@@ -249,6 +249,10 @@ The remote port, optional, defaults to `22`.
 
 Determins if the task should stop or continue if any of the commands returns a code other than 0. Disabled by default.
 
+###### suppressRemoteErrors ```boolean```
+
+If true only display remote error messages if Grunt is run with the --verbose flag.
+
 ## Notes
 
 * To see the output of your `sshexec` command, use the `--verbose` flag.
