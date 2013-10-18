@@ -32,6 +32,11 @@ module.exports = function (grunt) {
       directoryPermissions: parseInt(755, 8)
     });
 
+    var tally = {
+      dirs: 0,
+      files: 0
+    };
+
     grunt.verbose.writeflags(options, 'Raw Options');
 
     function setOption(optionName){
@@ -129,6 +134,7 @@ module.exports = function (grunt) {
               }
               else {
                 callback();
+                tally.dirs++;
               }
             });
           }, function (err) {
@@ -144,6 +150,7 @@ module.exports = function (grunt) {
                   return callback(err);
                 }
                 grunt.verbose.writeln('copied ' + file.src + ' to ' + file.dest);
+                tally.files++;
                 callback();
               });
             }, function (err) {
@@ -169,6 +176,13 @@ module.exports = function (grunt) {
     c.on('close', function (had_error) {
       if (had_error) {
         grunt.log.error(had_error);
+      }
+      if (tally.dirs) {
+        grunt.log.writeln('Created ' + tally.dirs.toString().cyan + ' directories');
+      }
+
+      if (tally.files) {
+        grunt.log.writeln((tally.dirs ? ', copied ' : 'Copied ') + tally.files.toString().cyan + ' files');
       }
       grunt.verbose.writeln('Connection :: close');
       done();
