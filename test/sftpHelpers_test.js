@@ -29,6 +29,7 @@ module.exports = {
     'use strict';
     conn = {
       opendir: function () {},
+      stat: function () {},
       mkdir: function () {}
     };
 
@@ -37,10 +38,10 @@ module.exports = {
   },
   "existing directories": function (test) {
     'use strict';
-    mock.expects("opendir").withArgs("/").callsArgWith(1, null, null);
-    mock.expects("opendir").withArgs("/foo").callsArgWith(1, null, null);
-    mock.expects("opendir").withArgs("/foo/bar").callsArgWith(1, null, null);
-    mock.expects("opendir").withArgs("/foo/bar/baz").callsArgWith(1, null, null);
+    mock.expects("stat").withArgs("/").callsArgWith(1, null, null);
+    mock.expects("stat").withArgs("/foo").callsArgWith(1, null, null);
+    mock.expects("stat").withArgs("/foo/bar").callsArgWith(1, null, null);
+    mock.expects("stat").withArgs("/foo/bar/baz").callsArgWith(1, null, null);
 
     var finalCallback = sinon.spy();
     helper.sftpRecursiveMkDir(conn, "/foo/bar/baz", {}, finalCallback);
@@ -50,10 +51,10 @@ module.exports = {
   },
   "create directories": function (test) {
     'use strict';
-    mock.expects("opendir").withArgs("/").callsArgWith(1, false, null);
-    mock.expects("opendir").withArgs("/foo").callsArgWith(1, {}, null);
-    mock.expects("opendir").withArgs("/foo/bar").callsArgWith(1, {}, null);
-    mock.expects("opendir").withArgs("/foo/bar/baz").callsArgWith(1, {}, null);
+    mock.expects("stat").withArgs("/").callsArgWith(1, false, null);
+    mock.expects("stat").withArgs("/foo").callsArgWith(1, {}, null);
+    mock.expects("stat").withArgs("/foo/bar").callsArgWith(1, {}, null);
+    mock.expects("stat").withArgs("/foo/bar/baz").callsArgWith(1, {}, null);
 
     mock.expects("mkdir").withArgs("/foo").callsArg(2);
     mock.expects("mkdir").withArgs("/foo/bar").callsArg(2);
@@ -86,9 +87,9 @@ module.exports = {
   },
   "creation fails": function (test) {
     'use strict';
-    mock.expects("opendir").withArgs("/").callsArgWith(1, false, null);
-    mock.expects("opendir").withArgs("/foo").callsArgWith(1, {}, null);
-    mock.expects("opendir").withArgs("/foo/bar").callsArgWith(1, {}, null);
+    mock.expects("stat").withArgs("/").callsArgWith(1, false, null);
+    mock.expects("stat").withArgs("/foo").callsArgWith(1, {}, null);
+    mock.expects("stat").withArgs("/foo/bar").callsArgWith(1, {}, null);
 
     mock.expects("mkdir").withArgs("/foo").callsArg(2);
     mock.expects("mkdir").withArgs("/foo/bar").callsArgWith(2, {});
