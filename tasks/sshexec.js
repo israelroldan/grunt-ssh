@@ -88,7 +88,7 @@ module.exports = function (grunt) {
           }
           stream.on('data', function (data, extended) {
             var out = String(data);
-            if (extended === 'stderr' ) {
+            if (extended === 'stderr') {
               if (!options.suppressRemoteErrors) {
                 grunt.log.warn(out);
               }
