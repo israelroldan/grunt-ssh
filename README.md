@@ -290,8 +290,8 @@ Determins if the task should stop or continue if any of the commands returns a c
 If true only display remote error messages if Grunt is run with the --verbose flag.
 
 ## Release History
-* 2013/11/17 - v0.8.0 - [#33:](https://github.com/andrewrjones/grunt-ssh/pull/33) File counter for `sftp` and `suppressRemoteErrors` option for `sshexec` ([David J. Bradshaw](https://github.com/davidjbradshaw)). [#34:](https://github.com/andrewrjones/grunt-ssh/pull/34) Use stat() instead of opendir() for checking existence of a dir ([Harri Hälikkä](https://github.com/harriha)). [#38:](https://github.com/andrewrjones/grunt-ssh/pull/34) Doc updates ([Alexandre Richonnier](https://github.com/heralight)).
-* 2013/10/17 - v0.7.0 - [#32:](https://github.com/andrewrjones/grunt-ssh/pull/32) Added command line options for username, password and passphrase ([David J. Bradshaw](https://github.com/davidjbradshaw)). Doc updates.
+* 2013/11/17 - v0.8.0 - [#33:](https://github.com/andrewrjones/grunt-ssh/pull/33) File counter for `sftp` and `suppressRemoteErrors` option for `sshexec` ([David J. Bradshaw](https://github.com/davidjbradshaw)); [#34:](https://github.com/andrewrjones/grunt-ssh/pull/34) Use stat() instead of opendir() for checking existence of a dir ([Harri Hälikkä](https://github.com/harriha)); [#38:](https://github.com/andrewrjones/grunt-ssh/pull/34) Doc updates ([Alexandre Richonnier](https://github.com/heralight)).
+* 2013/10/17 - v0.7.0 - [#32:](https://github.com/andrewrjones/grunt-ssh/pull/32) Added command line options for username, password and passphrase ([David J. Bradshaw](https://github.com/davidjbradshaw)); Doc updates.
 * 2013/09/25 - v0.6.2 - Allow sftp task to use the shared sshconfig; Allow overriding sshconfig properties in the task config ([Andy Royle](https://github.com/andyroyle)). Document using the private key with `sshexec`.
 * 2013/07/25 - v0.6.2 - Fix error when no passphrase is provided ([James Wyse](https://github.com/jameswyse)).
 * 2013/07/21 - v0.6.1 - `trim` options that may be read from files; Allow `sshexec` to use ssh-agent-based user authentication ([Andy Shinn](https://github.com/andyshinn)).
