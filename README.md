@@ -10,6 +10,18 @@
 
 This plugin requires Grunt `~0.4.0`
 
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+
+```shell
+npm install grunt-ssh --save-dev
+```
+
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+
+```js
+grunt.loadNpmTasks('grunt-ssh');
+```
+
 This library provides two Grunt tasks for ssh:
 
 * _sftp_
@@ -140,6 +152,17 @@ The password to authenticate on remote system.
 
 Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
 
+```js
+options: {
+         host: '<%= pkg.host %>',
+         port: '<%= pkg.port %>',
+         username: '<%= pkg.username %>',
+         agent: process.env.SSH_AUTH_SOCK
+}
+```
+
+If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
+
 ###### privateKey ```string```
 
 A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
@@ -223,6 +246,17 @@ The password to authenticate on remote system.
 ###### agent ```string```
 
 Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
+
+```js
+options: {
+         host: '<%= pkg.host %>',
+         port: '<%= pkg.port %>',
+         username: '<%= pkg.username %>',
+         agent: process.env.SSH_AUTH_SOCK
+}
+```
+
+If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
 
 ###### privateKey ```string```
 
