@@ -251,6 +251,10 @@ The remote port, optional, defaults to `22`.
 
 Determins if the task should stop or continue if any of the commands returns a code other than 0. Disabled by default.
 
+###### suppressRemoteErrors ```boolean```
+
+If true only display remote error messages if Grunt is run with the --verbose flag.
+
 ## Release History
 * 2013/11/XX - v0.7.1 - [#34:](https://github.com/andrewrjones/grunt-ssh/pull/34) Use stat() instead of opendir() for checking existence of a dir ([Harri Hälikkä](https://github.com/harriha)).
 * 2013/10/17 - v0.7.0 - [#32:](https://github.com/andrewrjones/grunt-ssh/pull/32) Added command line options for username, password and passphrase ([David J. Bradshaw](https://github.com/davidjbradshaw)). Doc updates.
