@@ -16,7 +16,7 @@ exports.init = function (grunt) {
     var ptr = 0;
 
     var mkdir = function (path, callback) {
-      c.opendir(currentPath, function (error, handle) {
+      c.stat(currentPath, function (error, stat) {
         if (error) {
           grunt.verbose.writeln("Creating " + currentPath);
           c.mkdir(currentPath, attributes, function (error) {
