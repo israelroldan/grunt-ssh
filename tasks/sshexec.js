@@ -31,6 +31,7 @@ module.exports = function (grunt) {
       port: utillib.port,
       ignoreErrors: false,
       minimatch: {},
+      pty: {},
       suppressRemoteErrors: false
     });
 
@@ -82,7 +83,7 @@ module.exports = function (grunt) {
       } else {
         var command = commands.shift();
         grunt.verbose.writeln('Executing :: ' + command);
-        c.exec(command, function (err, stream) {
+        c.exec(command, options.pty, function (err, stream) {
           if (err) {
             throw err;
           }
