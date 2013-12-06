@@ -57,6 +57,11 @@ module.exports = function (grunt) {
     setOption('password');
     setOption('passphrase');
 
+    // add trailing slash to path if needed
+    if (!options.path.match(/(\/|\\)$/)) {
+      options.path = options.path + '/';
+    }
+
     grunt.verbose.writeflags(options, 'Options');
 
     var files = this.files;

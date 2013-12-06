@@ -49,6 +49,7 @@ module.exports = function (grunt) {
           "./": "tasks/**/*.js"
         },
         options: {
+          path: '/tmp',
           host: '<%= secret.host %>',
           username: '<%= secret.username %>',
           // password auth
