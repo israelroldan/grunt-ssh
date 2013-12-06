@@ -175,6 +175,9 @@ module.exports = function (grunt) {
     c.on('error', function (err) {
       grunt.log.error('Connection :: error :: ' + err);
     });
+    c.on('debug', function (message) {
+      grunt.log.debug('Connection :: debug :: ' + message);
+    });
     c.on('end', function () {
       grunt.verbose.writeln('Connection :: end');
     });
