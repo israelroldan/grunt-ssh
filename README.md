@@ -4,7 +4,7 @@
 [![NPM version](https://badge.fury.io/js/grunt-ssh.png)](http://badge.fury.io/js/grunt-ssh)
 ![Dependencies](https://david-dm.org/andrewrjones/grunt-ssh.png)
 
-> SSH and SFTP tasks for Grunt.
+> SSH and SFTP tasks for Grunt, using [a pure JS implementation of ssh2](https://github.com/mscdex/ssh2).
 
 ## Overview
 
