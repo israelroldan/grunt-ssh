@@ -9,3 +9,4 @@ _exrc
 node_modules
 npm-debug.log
 secret*.json
+*.sublime-*
