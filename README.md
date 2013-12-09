@@ -29,7 +29,7 @@ This library provides two Grunt tasks for ssh:
 
 *This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can't please use [v0.1.0](https://github.com/andrewrjones/grunt-ssh/tree/v0.1.0).*
 
-## Synopsys
+## Synopsis
 
 ```js
 // don't keep passwords in source control
