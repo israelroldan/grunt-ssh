@@ -310,6 +310,7 @@ options: {
 If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
 
 ## Release History
+* 2013/12/06 - v0.9.1 - [#44:](https://github.com/andrewrjones/grunt-ssh/issues/44) Improve doc for SSH connection options ([Mark Stosberg](https://github.com/markstos)); [#45:](https://github.com/andrewrjones/grunt-ssh/issues/45) Fix incorrect Connection parameter in `execCommand` ([jabes](https://github.com/jabes)).
 * 2013/12/06 - v0.9.0 - [#28:](https://github.com/andrewrjones/grunt-ssh/issues/28) Pseudo-TTY support; [#40:](https://github.com/andrewrjones/grunt-ssh/issues/40) Add trailing slash to path if needed; [#31:](https://github.com/andrewrjones/grunt-ssh/issues/31) Print debug messages from ssh2 when `--debug` option is passed; Use latest version of ssh2 (0.2.14).
 * 2013/11/17 - v0.8.0 - [#33:](https://github.com/andrewrjones/grunt-ssh/pull/33) File counter for `sftp` and `suppressRemoteErrors` option for `sshexec` ([David J. Bradshaw](https://github.com/davidjbradshaw)); [#34:](https://github.com/andrewrjones/grunt-ssh/pull/34) Use stat() instead of opendir() for checking existence of a dir ([Harri Hälikkä](https://github.com/harriha)); [#38:](https://github.com/andrewrjones/grunt-ssh/pull/34) Doc updates ([Alexandre Richonnier](https://github.com/heralight)).
 * 2013/10/17 - v0.7.0 - [#32:](https://github.com/andrewrjones/grunt-ssh/pull/32) Added command line options for username, password and passphrase ([David J. Bradshaw](https://github.com/davidjbradshaw)); Doc updates.
