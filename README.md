@@ -29,7 +29,7 @@ This library provides two Grunt tasks for ssh:
 
 *This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can't please use [v0.1.0](https://github.com/andrewrjones/grunt-ssh/tree/v0.1.0).*
 
-## Synopsys
+## Synopsis
 
 ```js
 // don't keep passwords in source control
@@ -144,40 +144,6 @@ Options for [minimatch](https://github.com/isaacs/minimatch).
 
 The username to authenticate as on remote system.
 
-###### password ```string```
-
-The password to authenticate on remote system.
-
-###### agent ```string```
-
-Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
-
-```js
-options: {
-         host: '<%= pkg.host %>',
-         port: '<%= pkg.port %>',
-         username: '<%= pkg.username %>',
-         agent: process.env.SSH_AUTH_SOCK
-}
-```
-
-If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
-
-###### privateKey ```string```
-
-A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
-
-```js
-options: {
-  privateKey: grunt.file.read("id_rsa"),
-  passphrase: <%= secret.passphrase %>
-}
-```
-
-###### passphrase ```string```
-
-The passphrase to use with the ```privateKey```. As per the ```privateKey```, do not expose this in your Gruntfile or anywhere that'll end up public unless you mean it, load it from an external file.
-
 ###### host ```string```
 
 The remote host to copy to, set up in your `~/.ssh/config`.
@@ -205,6 +171,7 @@ For example:
 
 Would SFTP the files in dist directly into tmp (eg. ```dist/index.html``` ==> ```/tmp/index.html```)
 
+
 ###### createDirectories ```boolean```
 
 Optionally check whether the directories files will be sftp'd to exist first. This can take a bit of extra time as directories need to be checked, so this option is disabled by default.
@@ -218,6 +185,48 @@ The permissions to apply to directories created with createDirectories.  The def
 ```js
 directoryPermissions: parseInt(755, 8)
 ```
+
+##### Connection options
+
+There are three mutually exclusive sets of connection options. They are
+`privateKey` (with optional `passphrase`), `password`, and `agent`. If any of
+these options are private, they will be tried exclusively, and other connection
+options will be ignored. Each is described a bit more below.
+
+###### privateKey ```string```
+
+A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
+
+If a privateKey and passphrase are required, they 
+
+```js
+options: {
+  privateKey: grunt.file.read("id_rsa"),
+  passphrase: <%= secret.passphrase %>
+}
+```
+
+###### passphrase ```string```
+
+The passphrase to use with the ```privateKey```. As per the ```privateKey```, do not expose this in your Gruntfile or anywhere that'll end up public unless you mean it, load it from an external file.
+
+###### password ```string```
+
+The password to authenticate on remote system.
+
+###### agent ```string```
+
+Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
+
+```js
+options: {
+         host: '<%= pkg.host %>',
+         port: '<%= pkg.port %>',
+         username: '<%= pkg.username %>',
+         agent: process.env.SSH_AUTH_SOCK
+}
+```
+If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
 
 ### sshexec
 
@@ -239,39 +248,6 @@ The command or commands to run, if an array is supplied, all the commands are ex
 
 The username to authenticate as on remote system.
 
-###### password ```string```
-
-The password to authenticate on remote system.
-
-###### agent ```string```
-
-Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
-
-```js
-options: {
-         host: '<%= pkg.host %>',
-         port: '<%= pkg.port %>',
-         username: '<%= pkg.username %>',
-         agent: process.env.SSH_AUTH_SOCK
-}
-```
-
-If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
-
-###### privateKey ```string```
-
-A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
-
-```js
-options: {
-  privateKey: grunt.file.read("id_rsa"),
-  passphrase: <%= secret.passphrase %>
-}
-```
-
-###### passphrase ```string```
-
-The passphrase to use with the ```privateKey```. As per the ```privateKey```, do not expose this in your Gruntfile or anywhere that'll end up public unless you mean it, load it from an external file.
 
 ###### host ```string```
 
@@ -292,6 +268,46 @@ Determins if the task should stop or continue if any of the commands returns a c
 ###### suppressRemoteErrors ```boolean```
 
 If true only display remote error messages if Grunt is run with the --verbose flag.
+
+##### Connection options
+
+There are three mutually exclusive sets of connection options. They are
+`privateKey` (with optional `passphrase`), `password`, and `agent`. If any of
+these options are private, they will be tried exclusively, and other connection
+options will be ignored. Each is described a bit more below.
+
+###### privateKey ```string```
+
+A string containing the contents of the private key to use to authenticate with the remote system, you can load this from a file using ```grunt.file.read```. Be careful you don't put this into source control unless you mean it!
+
+```js
+options: {
+  privateKey: grunt.file.read("id_rsa"),
+  passphrase: <%= secret.passphrase %>
+}
+```
+###### passphrase ```string```
+
+The passphrase to use with the ```privateKey```. As per the ```privateKey```, do not expose this in your Gruntfile or anywhere that'll end up public unless you mean it, load it from an external file.
+
+###### password ```string```
+
+The password to authenticate on remote system.
+
+###### agent ```string```
+
+Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
+
+```js
+options: {
+         host: '<%= pkg.host %>',
+         port: '<%= pkg.port %>',
+         username: '<%= pkg.username %>',
+         agent: process.env.SSH_AUTH_SOCK
+}
+```
+
+If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
 
 ## Release History
 * 2013/12/06 - v0.9.0 - [#28:](https://github.com/andrewrjones/grunt-ssh/issues/28) Pseudo-TTY support; [#40:](https://github.com/andrewrjones/grunt-ssh/issues/40) Add trailing slash to path if needed; [#31:](https://github.com/andrewrjones/grunt-ssh/issues/31) Print debug messages from ssh2 when `--debug` option is passed; Use latest version of ssh2 (0.2.14).
