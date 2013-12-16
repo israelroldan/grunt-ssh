@@ -86,7 +86,7 @@ module.exports = function (grunt) {
       } else {
         var command = commands.shift();
         grunt.verbose.writeln('Executing :: ' + command);
-        c.exec(command, options.pty, function (err, stream) {
+        c.exec(command, options, function (err, stream) {
           if (err) {
             throw err;
           }
