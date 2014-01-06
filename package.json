@@ -30,7 +30,8 @@
   },
   "dependencies": {
     "ssh2": ">=0.2.14",
-    "async": "*"
+    "async": "*",
+    "progress": "~1.1.3"
   },
   "devDependencies": {
     "grunt": "~0.4",

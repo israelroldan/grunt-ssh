@@ -98,5 +98,28 @@ exports.init = function (grunt) {
     return connectionOptions;
   };
 
+  // Converts a file size in bytes into a human-readable file size string.
+  exports.fileSizeReadable = function (bytes) {
+    var KB = 1024,
+        MB = KB * 1024,
+        GB = MB * 1024,
+        result;
+
+    if (bytes < KB) {
+      result = bytes + 'B';
+    }
+    else if (bytes < MB) {
+      result = Math.floor(bytes / KB) + 'KB';
+    }
+    else if (bytes < GB) {
+      result = Math.floor(bytes / MB) + 'MB';
+    }
+    else {
+      result = Math.floor(bytes / GB) + 'GB';
+    }
+
+    return result;
+  };
+
   return exports;
 };

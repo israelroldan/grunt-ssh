@@ -176,6 +176,15 @@ module.exports = {
     test.equal(util.validateNumber("name", 32), 32, "should validate number");
     test.equal(util.validateNumber("name", 0), 0, "should validate zero");
     test.done();
-  }
+  },
+  fileSizeReadable: function (test) {
+    'use strict';
+    test.equal(util.fileSizeReadable(0), "0B", "0 should be 0B");
+    test.equal(util.fileSizeReadable(1023), "1023B", "less than one KB should be B");
+    test.equal(util.fileSizeReadable(1048575), "1023KB", "less than one MB should be KB");
+    test.equal(util.fileSizeReadable(1073741823), "1023MB", "less than one GB should be MB");
+    test.equal(util.fileSizeReadable(1073741825), "1GB", "greater than one GB should be GB");
 
+    test.done();
+  }
 };
