@@ -38,7 +38,7 @@
     "grunt-contrib-jshint": "~0.1.1",
     "grunt-bump": "~0.0.2",
     "nodeunit": "~0.7.4",
-    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-nodeunit": "~0.2.2",
     "sinon": "~1.6.0",
     "grunt-beautify": "git+https://github.com/terryweiss/grunt-beautify.git#FixForGrunt040"
   },
