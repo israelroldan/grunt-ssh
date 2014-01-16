@@ -24,6 +24,11 @@ module.exports = function (grunt) {
       files: '<%= jshint.files %>',
       tasks: 'default'
     },
+    bump: {
+      options: {
+        pushTo: 'origin'
+      }
+    },
     jshint: {
       options: {
         curly: true,
