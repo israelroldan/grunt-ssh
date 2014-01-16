@@ -43,7 +43,8 @@ sftp: {
       path: '/tmp/',
       host: '<%= secret.host %>',
       username: '<%= secret.username %>',
-      password: '<%= secret.password %>'
+      password: '<%= secret.password %>',
+      showProgress: true
     }
   }
 },
@@ -185,6 +186,10 @@ The permissions to apply to directories created with createDirectories.  The def
 ```js
 directoryPermissions: parseInt(755, 8)
 ```
+
+###### showProgress ```boolean```
+
+Show a progress bar during the file transfer.  The default is ```false```.
 
 ##### Connection options
 

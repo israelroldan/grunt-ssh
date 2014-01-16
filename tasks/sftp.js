@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     var Connection = require('ssh2');
     var path = require('path');
     var sftpHelper = require("./lib/sftpHelpers").init(grunt);
+    var ProgressBar = require('progress');
 
     var options = this.options({
       path: '',
@@ -29,7 +30,8 @@ module.exports = function (grunt) {
       minimatch: {},
       srcBasePath: "",
       createDirectories: false,
-      directoryPermissions: parseInt(755, 8)
+      directoryPermissions: parseInt(755, 8),
+      showProgress: false
     });
 
     var tally = {
@@ -56,6 +58,7 @@ module.exports = function (grunt) {
     setOption('username');
     setOption('password');
     setOption('passphrase');
+    setOption('showProgress');
 
     // add trailing slash to path if needed
     if (!options.path.match(/(\/|\\)$/)) {
@@ -149,8 +152,32 @@ module.exports = function (grunt) {
             }
 
             async.eachSeries(fileQueue, function (file, callback) {
+              var fpOptions;
+
+              if (options.showProgress) {
+                var fileSize = fs.statSync(file.src).size;
+                var barTemplate = file.src + ' [:bar] :percent of ' + utillib.fileSizeReadable(fileSize);
+
+                var bar = new ProgressBar(barTemplate, {
+                  complete: '=',
+                  incomplete: ' ',
+                  width: 20,
+                  total: fileSize
+                });
+
+                fpOptions = {
+                  step: function (totalSent, lastSent, total) {
+                    bar.tick(lastSent);
+                  }
+                };
+              } else {
+                fpOptions = {
+                  step: function () {}
+                };
+              }
+
               grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
-              sftp.fastPut(file.src, file.dest, function (err) {
+              sftp.fastPut(file.src, file.dest, fpOptions, function (err) {
                 if (err) {
                   return callback(err);
                 }
