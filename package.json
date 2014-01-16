@@ -41,7 +41,8 @@
     "nodeunit": "~0.7.4",
     "grunt-contrib-nodeunit": "~0.2.2",
     "sinon": "~1.6.0",
-    "grunt-beautify": "git+https://github.com/terryweiss/grunt-beautify.git#FixForGrunt040"
+    "grunt-beautify": "git+https://github.com/terryweiss/grunt-beautify.git#FixForGrunt040",
+    "grunt-npm": "0.0.2"
   },
   "peerDependencies": {
     "grunt": "~0.4.0"
@@ -54,5 +55,27 @@
     "remote",
     "exec",
     "rexec"
+  ],
+  "contributors": [
+    "Andrew Jones <andrewjones86@googlemail.com>",
+    "Andrew Jones <andrew@arjones.co.uk>",
+    "Marcin Szczepanski <marcins@webqem.com>",
+    "andrewrjones <andrewjones86@googlemail.com>",
+    "David J. Bradshaw <dave@bradshaw.net>",
+    "John Wright <johnwright@fairfaxmedia.com.au>",
+    "John Wright <johngeorge.wright@gmail.com>",
+    "Mark Stosberg <mark@rideamigos.com>",
+    "Anders Johnson <adjohnson916@gmail.com>",
+    "Andrew Stewart <andy@rocketboots.com>",
+    "owenmead <owenmead@gmail.com>",
+    "Andy Royle <ajroyle@gmail.com>",
+    "Andy Shinn <andys@andyshinn.as>",
+    "Evan Stoner <evan.stoner@gmail.com>",
+    "James Wyse <james@jameswyse.net>",
+    "Jason Williams <jaswilli@gmail.com>",
+    "Justin Kulesza <justin.kulesza@atomicobject.com>",
+    "harriha <harri.halikka@gmail.com>",
+    "jabes <bull.justin@gmail.com>",
+    "Alexandre Richonnier <heralight+github@gmail.com>"
   ]
 }
