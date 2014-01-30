@@ -152,7 +152,10 @@ module.exports = function (grunt) {
             }
 
             async.eachSeries(fileQueue, function (file, callback) {
-              var fpOptions;
+              var fpOptions = {
+                step: function () {},
+                chunkSize: options.chunkSize
+              };
 
               if (options.showProgress) {
                 var fileSize = fs.statSync(file.src).size;
@@ -165,14 +168,8 @@ module.exports = function (grunt) {
                   total: fileSize
                 });
 
-                fpOptions = {
-                  step: function (totalSent, lastSent, total) {
+                fpOptions.step = function (totalSent, lastSent, total) {
                     bar.tick(lastSent);
-                  }
-                };
-              } else {
-                fpOptions = {
-                  step: function () {}
                 };
               }
 
