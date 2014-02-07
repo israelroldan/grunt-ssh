@@ -212,13 +212,14 @@ module.exports = function (grunt) {
       if (had_error) {
         grunt.log.error(had_error);
       }
-      if (tally.dirs) {
-        grunt.log.writeln('Created ' + tally.dirs.toString().cyan + ' directories');
-      }
 
-      if (tally.files) {
-        grunt.log.writeln((tally.dirs ? ', copied ' : 'Copied ') + tally.files.toString().cyan + ' files');
-      }
+      grunt.log.writeln(
+        (
+          tally.dirs ?
+          'Created ' + tally.dirs.toString().cyan + ' directories, copied ' :
+          'Copied '
+        ) + (tally.files ? tally.files.toString().cyan + ' files' : '')
+      );
       grunt.verbose.writeln('Connection :: close');
       done();
     });
