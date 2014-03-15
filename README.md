@@ -329,6 +329,7 @@ How often (in milliseconds) to wait for the SSH handshake to complete.
 ## Links
 
 * [Grunt your deployments too - toptable Tech Blog](http://tech.toptable.co.uk/blog/2013/08/08/grunt-your-deployments-too/)
+* [Grunt Deployment over SSH with Git - Justin Klemm](http://justinklemm.com/grunt-js-deployment-ssh-git/)
 
 ## Release History
 * 2014/03/15 - v0.11.0 - [#50:](https://github.com/andrewrjones/grunt-ssh/pull/50) Enable setting of `chunkSize` option ([Michael Lam](https://github.com/mlamz)); [#51:](https://github.com/andrewrjones/grunt-ssh/pull/51) Fix bad output on close ([Eric Kever](https://github.com/pinktrink)); [#56:](https://github.com/andrewrjones/grunt-ssh/pull/56) Add readyTimeout option for ssh2 connections ([calebTomlinson](https://github.com/calebTomlinson)).
