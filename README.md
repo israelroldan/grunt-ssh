@@ -191,6 +191,10 @@ directoryPermissions: parseInt(755, 8)
 
 Show a progress bar during the file transfer.  The default is ```false```.
 
+###### chunkSize ```integer```
+
+Size of each read in bytes (default: 32768)
+
 ##### Connection options
 
 There are three mutually exclusive sets of connection options. They are
@@ -232,6 +236,10 @@ options: {
 }
 ```
 If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
+
+###### readyTimeout ```integer```
+
+How often (in milliseconds) to wait for the SSH handshake to complete.
 
 ### sshexec
 
@@ -312,13 +320,18 @@ options: {
 }
 ```
 
-If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
+If you use ```jshint```, remember to add ```process: true``` in ```globals``` 
+
+###### readyTimeout ```integer```
+
+How often (in milliseconds) to wait for the SSH handshake to complete.
 
 ## Links
 
 * [Grunt your deployments too - toptable Tech Blog](http://tech.toptable.co.uk/blog/2013/08/08/grunt-your-deployments-too/)
 
 ## Release History
+* 2014/01/16 - v0.11.0 - [#50:](https://github.com/andrewrjones/grunt-ssh/pull/50) Enable setting of `chunkSize` option ([Michael Lam](https://github.com/mlamz)); [#51:](https://github.com/andrewrjones/grunt-ssh/pull/51) Fix bad output on close ([Eric Kever](https://github.com/pinktrink)); [#56:](https://github.com/andrewrjones/grunt-ssh/pull/56) Add readyTimeout option for ssh2 connections ([calebTomlinson](https://github.com/calebTomlinson)).
 * 2014/01/16 - v0.10.0 - [#47:](https://github.com/andrewrjones/grunt-ssh/pull/47) Add an optional progress bar for sftp uploads ([Jason Williams](https://github.com/jaswilli)).
 * 2013/12/06 - v0.9.1 - [#44:](https://github.com/andrewrjones/grunt-ssh/issues/44) Improve doc for SSH connection options ([Mark Stosberg](https://github.com/markstos)); [#45:](https://github.com/andrewrjones/grunt-ssh/issues/45) Fix incorrect Connection parameter in `execCommand` ([jabes](https://github.com/jabes)).
 * 2013/12/06 - v0.9.0 - [#28:](https://github.com/andrewrjones/grunt-ssh/issues/28) Pseudo-TTY support; [#40:](https://github.com/andrewrjones/grunt-ssh/issues/40) Add trailing slash to path if needed; [#31:](https://github.com/andrewrjones/grunt-ssh/issues/31) Print debug messages from ssh2 when `--debug` option is passed; Use latest version of ssh2 (0.2.14).
