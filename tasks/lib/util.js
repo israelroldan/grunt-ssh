@@ -79,7 +79,8 @@ exports.init = function (grunt) {
     var connectionOptions = {
       host: options.host,
       port: options.port,
-      username: options.username
+      username: options.username,
+      readyTimeout: options.readyTimeout
     };
 
     if (options.privateKey) {
