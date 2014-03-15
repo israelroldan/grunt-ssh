@@ -169,7 +169,7 @@ module.exports = function (grunt) {
                 });
 
                 fpOptions.step = function (totalSent, lastSent, total) {
-                    bar.tick(lastSent);
+                  bar.tick(lastSent);
                 };
               }
 
@@ -210,13 +210,8 @@ module.exports = function (grunt) {
         grunt.log.error(had_error);
       }
 
-      grunt.log.writeln(
-        (
-          tally.dirs ?
-          'Created ' + tally.dirs.toString().cyan + ' directories, copied ' :
-          'Copied '
-        ) + (tally.files ? tally.files.toString().cyan + ' files' : '')
-      );
+      grunt.log.writeln((
+      tally.dirs ? 'Created ' + tally.dirs.toString().cyan + ' directories, copied ' : 'Copied ') + (tally.files ? tally.files.toString().cyan + ' files' : ''));
       grunt.verbose.writeln('Connection :: close');
       done();
     });
