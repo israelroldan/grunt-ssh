@@ -61,7 +61,7 @@ module.exports = function (grunt) {
     setOption('showProgress');
 
     // add trailing slash to path if needed
-    if (!options.path.match(/(\/|\\)$/)) {
+    if ((''!==options.path) && !options.path.match(/(\/|\\)$/)) {
       options.path = options.path + '/';
     }
 
