@@ -74,30 +74,26 @@ module.exports = function (grunt) {
 
     c.on('connect', function () {
       grunt.verbose.writeln('Connection :: connect');
-    });
+    }).on('ready', function () {
 
-    c.on('ready', function () {
-
-      async.eachSeries(files, function (file, callback) {
-        var srcFiles = grunt.file.expand(options.minimatch, file.src);
-
-        if (srcFiles.length === 0) {
-          return callback('Unable to copy; no valid source files were found.');
+      c.sftp(function (err, sftp) {
+        if (err) {
+          c.end();
+          grunt.log.error(err);
+          return;
         }
+        sftp.on('end', function () {
+          grunt.verbose.writeln('SFTP :: session end');
+        }).on('close', function (had_error) {
+          grunt.verbose.writeln('SFTP :: session close');
+        });
 
-        c.sftp(function (err, sftp) {
-          if (err) {
-            return callback(err);
+        async.eachSeries(files, function (file, callback) {
+          var srcFiles = grunt.file.expand(options.minimatch, file.src);
+
+          if (srcFiles.length === 0) {
+            return callback(new Error('Unable to copy; no valid source files were found.'));
           }
-          sftp.on('end', function () {
-            grunt.verbose.writeln('SFTP :: SFTP session closed');
-          });
-          sftp.on('close', function (had_error) {
-            grunt.verbose.writeln('SFTP :: close');
-            if (had_error) {
-              return callback(had_error);
-            }
-          });
 
           // TODO - before we start copying files ensure all
           // the directories we are copying into will exist, otherwise
@@ -138,7 +134,7 @@ module.exports = function (grunt) {
               permissions: options.directoryPermissions
             }, function (result, msg) {
               if (!result) {
-                callback(msg);
+                callback(new Error(msg));
               }
               else {
                 callback();
@@ -147,13 +143,12 @@ module.exports = function (grunt) {
             });
           }, function (err) {
             if (err) {
-              callback("Path creation failed: " + err);
+              callback(new Error('Path creation failed: ' + err));
               return;
             }
 
             async.eachSeries(fileQueue, function (file, callback) {
               var fpOptions = {
-                step: function () {},
                 chunkSize: options.chunkSize
               };
 
@@ -183,29 +178,24 @@ module.exports = function (grunt) {
                 callback();
               });
             }, function (err) {
-              sftp.end();
               callback(err);
             });
           });
+        }, function (err) {
+          if (err) {
+            grunt.log.error(err);
+          }
+          c.end();
         });
-      }, function (err) {
-        if (err) {
-          grunt.log.error(err);
-        }
-        c.end();
       });
 
-    });
-    c.on('error', function (err) {
+    }).on('error', function (err) {
       grunt.log.error('Connection :: error :: ' + err);
-    });
-    c.on('debug', function (message) {
+    }).on('debug', function (message) {
       grunt.log.debug('Connection :: debug :: ' + message);
-    });
-    c.on('end', function () {
+    }).on('end', function () {
       grunt.verbose.writeln('Connection :: end');
-    });
-    c.on('close', function (had_error) {
+    }).on('close', function (had_error) {
       if (had_error) {
         grunt.log.error(had_error);
       }
