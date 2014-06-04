@@ -190,7 +190,7 @@ module.exports = function (grunt) {
       });
 
     }).on('error', function (err) {
-      grunt.log.error('Connection :: error :: ' + err);
+      grunt.fail.warn('Connection :: error :: ' + err);
     }).on('debug', function (message) {
       grunt.log.debug('Connection :: debug :: ' + message);
     }).on('end', function () {
