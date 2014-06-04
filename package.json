@@ -29,7 +29,7 @@
     "test": "grunt"
   },
   "dependencies": {
-    "ssh2": ">=0.2.14",
+    "ssh2": ">=0.2.25",
     "async": "*",
     "progress": "~1.1.3"
   },
