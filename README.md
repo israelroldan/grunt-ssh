@@ -332,6 +332,7 @@ How often (in milliseconds) to wait for the SSH handshake to complete.
 * [Grunt Deployment over SSH with Git - Justin Klemm](http://justinklemm.com/grunt-js-deployment-ssh-git/)
 
 ## Release History
+* 2014/06/04 - v0.11.2 - [#63:](https://github.com/andrewrjones/grunt-ssh/pull/63) `sftp` improvements [(Brian White](https://github.com/mscdex)
 * 2014/03/21 - v0.11.1 - [#59:](https://github.com/andrewrjones/grunt-ssh/pull/59) Don't add '/' to empty path ([David J. Bradshaw](https://github.com/davidjbradshaw)).
 * 2014/03/15 - v0.11.0 - [#50:](https://github.com/andrewrjones/grunt-ssh/pull/50) Enable setting of `chunkSize` option ([Michael Lam](https://github.com/mlamz)); [#51:](https://github.com/andrewrjones/grunt-ssh/pull/51) Fix bad output on close ([Eric Kever](https://github.com/pinktrink)); [#56:](https://github.com/andrewrjones/grunt-ssh/pull/56) Add readyTimeout option for ssh2 connections ([calebTomlinson](https://github.com/calebTomlinson)).
 * 2014/01/16 - v0.10.0 - [#47:](https://github.com/andrewrjones/grunt-ssh/pull/47) Add an optional progress bar for sftp uploads ([Jason Williams](https://github.com/jaswilli)).

@@ -1,7 +1,7 @@
 {
   "name": "grunt-ssh",
   "description": "SSH and SFTP tasks for Grunt",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "homepage": "https://github.com/andrewrjones/grunt-ssh",
   "author": {
     "name": "Andrew Jones",
@@ -45,7 +45,7 @@
     "grunt-npm": "0.0.2"
   },
   "peerDependencies": {
-    "grunt": "~0.4.0"
+    "grunt": "~0.4.1"
   },
   "keywords": [
     "gruntplugin",
@@ -73,6 +73,7 @@
     "Justin Kulesza <justin.kulesza@atomicobject.com>",
     "harriha <harri.halikka@gmail.com>",
     "jabes <bull.justin@gmail.com>",
-    "Alexandre Richonnier <heralight+github@gmail.com>"
+    "Alexandre Richonnier <heralight+github@gmail.com>",
+    "Brian White <mscdex@mscdex.net>"
   ]
 }
