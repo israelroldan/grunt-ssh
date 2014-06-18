@@ -103,19 +103,22 @@ module.exports = function (grunt) {
           var paths = [];
 
           srcFiles.forEach(function (srcFile) {
-            if (grunt.file.isDir(srcFile)) {
-              return;
-            }
             var destFile = options.path;
             if (srcFile.indexOf(options.srcBasePath) === 0) {
               destFile += srcFile.replace(options.srcBasePath, "");
             } else {
               destFile += srcFile;
             }
-            fileQueue.push({
-              src: srcFile,
-              dest: destFile
-            });
+            if (grunt.file.isDir(srcFile)) {
+              if (paths.indexOf(destFile) === -1) {
+                paths.push(destFile);
+              }
+            } else {
+              fileQueue.push({
+                src: srcFile,
+                dest: destFile
+              });
+            }
             var pathName = path.dirname(destFile);
             if (paths.indexOf(pathName) === -1) {
               paths.push(pathName);
