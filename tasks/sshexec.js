@@ -28,6 +28,7 @@ module.exports = function (grunt) {
       username: false,
       password: false,
       agent: "",
+      agentForward: false,
       port: utillib.port,
       ignoreErrors: false,
       minimatch: {},
