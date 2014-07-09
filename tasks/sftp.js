@@ -102,9 +102,9 @@ module.exports = function (grunt) {
         });
 
         async.eachSeries(files, function (file, callback) {
-          var srcFiles = options.mode == 'upload' ? grunt.file.expand(options.minimatch, file.src) : file.orig.src;
+          var srcFiles = options.mode === 'upload' ? grunt.file.expand(options.minimatch, file.src) : file.orig.src;
 
-          if (options.mode == 'download') {
+          if (options.mode === 'download') {
             if (srcFiles.length === 0) {
               return callback(new Error('Unable to copy; no valid remote files were found.'));
             }
@@ -116,7 +116,7 @@ module.exports = function (grunt) {
               if (options.srcBasePath.indexOf(options.path) === 0) {
                 offsetDirectory = options.srcBasePath.replace(options.path, "");
               }
-              if (file.dest[file.dest.length - 1] == '/') {
+              if (file.dest[file.dest.length - 1] === '/') {
                 downloadDest += srcFile.replace(offsetDirectory, "");
               }
 
@@ -146,7 +146,7 @@ module.exports = function (grunt) {
                             count--;
                             count += list.length;
                             if (!count) {
-                              callback()
+                              callback();
                             }
                             list.forEach(function (item) {
                               downloadingRecursive(path.join(directorySrc, item.filename), path.join(directoryDest, item.filename));
@@ -179,7 +179,7 @@ module.exports = function (grunt) {
                           tally.files++;
                           count--;
                           if (!count) {
-                            callback()
+                            callback();
                           }
                         });
                       };
@@ -247,7 +247,7 @@ module.exports = function (grunt) {
               }
             });
           } else {
-            if (options.mode == 'upload') {
+            if (options.mode === 'upload') {
               if (srcFiles.length === 0) {
                 return callback(new Error('Unable to copy; no valid source files were found.'));
               }
