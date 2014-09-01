@@ -53,14 +53,8 @@ module.exports = function (grunt) {
     setOption('config');
 
     if (options.config && grunt.util._(options.config).isString()) {
-      this.requiresConfig([
-        'sshconfig',
-        options.config
-      ]);
-      var configOptions = grunt.config.get([
-        'sshconfig',
-        options.config
-      ]);
+      this.requiresConfig(['sshconfig', options.config]);
+      var configOptions = grunt.config.get(['sshconfig', options.config]);
       options = grunt.util._.extend(options, configOptions);
     }
 
@@ -381,7 +375,7 @@ module.exports = function (grunt) {
       }
 
       grunt.log.writeln((
-        tally.dirs ? 'Created ' + tally.dirs.toString().cyan + ' directories, copied ' : 'Copied ') + (tally.files ? tally.files.toString().cyan + ' files' : ''));
+      tally.dirs ? 'Created ' + tally.dirs.toString().cyan + ' directories, copied ' : 'Copied ') + (tally.files ? tally.files.toString().cyan + ' files' : ''));
       grunt.verbose.writeln('Connection :: close');
       done();
     });
