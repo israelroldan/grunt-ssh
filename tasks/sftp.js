@@ -29,9 +29,11 @@ module.exports = function (grunt) {
       port: utillib.port,
       minimatch: {},
       srcBasePath: "",
+      destBasePath: "",
       createDirectories: false,
       directoryPermissions: parseInt(755, 8),
-      showProgress: false
+      showProgress: false,
+      mode: 'upload'
     });
 
     var tally = {
@@ -47,11 +49,18 @@ module.exports = function (grunt) {
         options[optionName] = option;
       }
     }
+
     setOption('config');
 
     if (options.config && grunt.util._(options.config).isString()) {
-      this.requiresConfig(['sshconfig', options.config]);
-      var configOptions = grunt.config.get(['sshconfig', options.config]);
+      this.requiresConfig([
+        'sshconfig',
+        options.config
+      ]);
+      var configOptions = grunt.config.get([
+        'sshconfig',
+        options.config
+      ]);
       options = grunt.util._.extend(options, configOptions);
     }
 
@@ -63,6 +72,10 @@ module.exports = function (grunt) {
     // add trailing slash to path if needed
     if (('' !== options.path) && !options.path.match(/(\/|\\)$/)) {
       options.path = options.path + '/';
+    }
+
+    if (('' !== options.destBasePath) && !options.destBasePath.match(/(\/|\\)$/)) {
+      options.destBasePath = options.destBasePath + '/';
     }
 
     grunt.verbose.writeflags(options, 'Options');
@@ -89,101 +102,265 @@ module.exports = function (grunt) {
         });
 
         async.eachSeries(files, function (file, callback) {
-          var srcFiles = grunt.file.expand(options.minimatch, file.src);
+          var srcFiles = options.mode === 'upload' ? grunt.file.expand(options.minimatch, file.src) : file.orig.src;
 
-          if (srcFiles.length === 0) {
-            return callback(new Error('Unable to copy; no valid source files were found.'));
-          }
-
-          // TODO - before we start copying files ensure all
-          // the directories we are copying into will exist, otherwise
-          // the async thingie causes problems
-          var fileQueue = [];
-          var functionQueue = [];
-          var paths = [];
-
-          srcFiles.forEach(function (srcFile) {
-            var destFile = options.path;
-            if (srcFile.indexOf(options.srcBasePath) === 0) {
-              destFile += srcFile.replace(options.srcBasePath, "");
-            } else {
-              destFile += srcFile;
+          if (options.mode === 'download') {
+            if (srcFiles.length === 0) {
+              return callback(new Error('Unable to copy; no valid remote files were found.'));
             }
-            if (grunt.file.isDir(srcFile)) {
-              if (paths.indexOf(destFile) === -1) {
-                paths.push(destFile);
+
+            srcFiles.forEach(function (srcFile) {
+              var downloadSrc = (options.srcBasePath ? options.srcBasePath : options.path) + srcFile;
+              var downloadDest = options.destBasePath ? file.dest.replace(/^\//, '') : file.dest;
+              var offsetDirectory = '';
+              if (options.srcBasePath.indexOf(options.path) === 0) {
+                offsetDirectory = options.srcBasePath.replace(options.path, "");
               }
-            } else {
-              fileQueue.push({
-                src: srcFile,
-                dest: destFile
-              });
-            }
-            var pathName = path.dirname(destFile);
-            if (paths.indexOf(pathName) === -1) {
-              paths.push(pathName);
-            }
-          });
-
-          async.eachSeries(paths, function (path, callback) {
-
-            if (!options.createDirectories) {
-              callback();
-              return;
-            }
-
-            grunt.verbose.writeln("Checking existence of path " + path);
-            sftpHelper.sftpRecursiveMkDir(sftp, path, {
-              permissions: options.directoryPermissions
-            }, function (result, msg) {
-              if (!result) {
-                callback(new Error(msg));
-              }
-              else {
-                callback();
-                tally.dirs++;
-              }
-            });
-          }, function (err) {
-            if (err) {
-              callback(new Error('Path creation failed: ' + err));
-              return;
-            }
-
-            async.eachSeries(fileQueue, function (file, callback) {
-              var fpOptions = {
-                chunkSize: options.chunkSize
-              };
-
-              if (options.showProgress) {
-                var fileSize = fs.statSync(file.src).size;
-                var barTemplate = file.src + ' [:bar] :percent of ' + utillib.fileSizeReadable(fileSize);
-
-                var bar = new ProgressBar(barTemplate, {
-                  complete: '=',
-                  incomplete: ' ',
-                  width: 20,
-                  total: fileSize
-                });
-
-                fpOptions.step = function (totalSent, lastSent, total) {
-                  bar.tick(lastSent);
-                };
+              if (file.dest[file.dest.length - 1] === '/') {
+                downloadDest += srcFile.replace(offsetDirectory, "");
               }
 
-              grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
-              sftp.fastPut(file.src, file.dest, fpOptions, function (err) {
-                if (err) {
-                  return callback(err);
+              srcFiles.forEach(function (srcFile) {
+                var destFile = options.path;
+                if (srcFile.indexOf(options.srcBasePath) === 0) {
+                  destFile += srcFile.replace(options.srcBasePath, "");
+                } else {
+                  destFile += srcFile;
                 }
-                grunt.verbose.writeln('copied ' + file.src + ' to ' + file.dest);
-                tally.files++;
-                callback();
+                if (grunt.file.isDir(srcFile)) {
+                  if (paths.indexOf(destFile) === -1) {
+                    paths.push(destFile);
+                  }
+                } else {
+                  fileQueue.push({
+                    src: srcFile,
+                    dest: destFile
+                  });
+                }
+                var pathName = path.dirname(destFile);
+                if (paths.indexOf(pathName) === -1) {
+                  paths.push(pathName);
+                }
               });
-            }, function (err) {
-              callback(err);
+              if (options.destBasePath) {
+                downloadDest = options.destBasePath + downloadDest;
+              }
+
+              var count = 1;
+              var downloadingRecursive = function (src, dest) {
+                sftp.open(src, 'r', function (err, buffer) {
+                  if (err) {
+                    return callback(err);
+                  }
+                  sftp.fstat(buffer, function (err, stats) {
+                    if (err) {
+                      return callback(err);
+                    }
+                    var isDirectory = stats.isDirectory();
+                    if (isDirectory) {
+                      grunt.verbose.writeln("Checking existence of path " + dest);
+                      fs.exists(dest, function (exists) {
+                        var recursiveCallback = function (directorySrc, directoryDest) {
+                          sftp.readdir(directorySrc, function (err, list) {
+                            if (err) {
+                              return callback(err);
+                            }
+                            count--;
+                            count += list.length;
+                            if (!count) {
+                              callback();
+                            }
+                            list.forEach(function (item) {
+                              downloadingRecursive(path.join(directorySrc, item.filename), path.join(directoryDest, item.filename));
+                            });
+                          });
+                        };
+                        if (!exists) {
+                          if (!options.createDirectories) {
+                            callback();
+                            return;
+                          }
+                          fs.mkdir(dest, options.directoryPermissions, function () {
+                            recursiveCallback(src, dest);
+                          });
+                        } else {
+                          recursiveCallback(src, dest);
+                        }
+                      });
+                    } else {
+                      var fpOptions = {
+                        chunkSize: options.chunkSize
+                      };
+                      var downloadFile = function (fileSrc, fileDest) {
+                        grunt.verbose.writeln('downloading ' + fileSrc + ' to ' + fileDest);
+                        sftp.fastGet(fileSrc, fileDest, fpOptions, function (err) {
+                          if (err) {
+                            return callback(err);
+                          }
+                          grunt.verbose.writeln('download ' + fileSrc + ' to ' + fileDest);
+                          tally.files++;
+                          count--;
+                          if (!count) {
+                            callback();
+                          }
+                        });
+                      };
+
+                      if (options.showProgress) {
+                        sftp.open(src, 'r', function (err, buffer) {
+                          sftp.fstat(buffer, function (err, stats) {
+                            if (err) {
+                              return callback(err);
+                            }
+                            var fileSize = stats.size;
+                            var barTemplate = src + ' [:bar] :percent of ' + utillib.fileSizeReadable(fileSize);
+
+                            var bar = new ProgressBar(barTemplate, {
+                              complete: '=',
+                              incomplete: ' ',
+                              width: 20,
+                              total: fileSize
+                            });
+
+                            fpOptions.step = function (totalSent, lastSent, total) {
+                              bar.tick(lastSent);
+                            };
+                            downloadFile(src, dest);
+                          });
+                        });
+                      } else {
+                        downloadFile(src, dest);
+                      }
+                    }
+                  });
+                });
+              };
+              var recursiveMkdir = function (dir, mode, callback) {
+                var existsFunction = fs.exists || path.exists;
+
+                existsFunction(dir, function (exists) {
+                  if (exists) {
+                    return callback(null);
+                  }
+
+                  var current = path.resolve(dir);
+                  var parent = path.dirname(current);
+
+                  recursiveMkdir(parent, mode, function (err) {
+                    if (err) {
+                      return callback(err);
+                    }
+
+                    fs.mkdir(current, mode, function (err) {
+                      if (err) {
+                        return callback(err);
+                      }
+                      callback();
+                    });
+                  });
+                });
+              };
+              if (options.createDirectories) {
+                recursiveMkdir(path.dirname(downloadDest), options.directoryPermissions, function () {
+                  downloadingRecursive(downloadSrc, downloadDest);
+                });
+              } else {
+                downloadingRecursive(downloadSrc, downloadDest);
+              }
             });
-          });
+          } else {
+            if (options.mode === 'upload') {
+              if (srcFiles.length === 0) {
+                return callback(new Error('Unable to copy; no valid source files were found.'));
+              }
+
+              // TODO - before we start copying files ensure all
+              // the directories we are copying into will exist, otherwise
+              // the async thingie causes problems
+              var fileQueue = [];
+              var functionQueue = [];
+              var paths = [];
+
+              srcFiles.forEach(function (srcFile) {
+                if (grunt.file.isDir(srcFile)) {
+                  return;
+                }
+                var destFile = options.path;
+                if (srcFile.indexOf(options.srcBasePath) === 0) {
+                  destFile += srcFile.replace(options.srcBasePath, "");
+                } else {
+                  destFile += srcFile;
+                }
+                fileQueue.push({
+                  src: srcFile,
+                  dest: destFile
+                });
+                var pathName = path.dirname(destFile);
+                if (paths.indexOf(pathName) === -1) {
+                  paths.push(pathName);
+                }
+              });
+
+              async.eachSeries(paths, function (path, callback) {
+
+                if (!options.createDirectories) {
+                  callback();
+                  return;
+                }
+
+                grunt.verbose.writeln("Checking existence of path " + path);
+                sftpHelper.sftpRecursiveMkDir(sftp, path, {
+                  permissions: options.directoryPermissions
+                }, function (result, msg) {
+                  if (!result) {
+                    callback(new Error(msg));
+                  } else {
+                    callback();
+                    tally.dirs++;
+                  }
+                });
+              }, function (err) {
+                if (err) {
+                  callback(new Error('Path creation failed: ' + err));
+                  return;
+                }
+
+                async.eachSeries(fileQueue, function (file, callback) {
+                  var fpOptions = {
+                    chunkSize: options.chunkSize
+                  };
+
+                  if (options.showProgress) {
+                    var fileSize = fs.statSync(file.src).size;
+                    var barTemplate = file.src + ' [:bar] :percent of ' + utillib.fileSizeReadable(fileSize);
+
+                    var bar = new ProgressBar(barTemplate, {
+                      complete: '=',
+                      incomplete: ' ',
+                      width: 20,
+                      total: fileSize
+                    });
+
+                    fpOptions.step = function (totalSent, lastSent, total) {
+                      bar.tick(lastSent);
+                    };
+                  }
+
+                  grunt.verbose.writeln('copying ' + file.src + ' to ' + file.dest);
+                  sftp.fastPut(file.src, file.dest, fpOptions, function (err) {
+                    if (err) {
+                      return callback(err);
+                    }
+                    grunt.verbose.writeln('copied ' + file.src + ' to ' + file.dest);
+                    tally.files++;
+                    callback();
+                  });
+                }, function (err) {
+                  callback(err);
+                });
+              });
+            }
+          }
         }, function (err) {
           if (err) {
             grunt.log.error(err);
@@ -204,7 +381,7 @@ module.exports = function (grunt) {
       }
 
       grunt.log.writeln((
-      tally.dirs ? 'Created ' + tally.dirs.toString().cyan + ' directories, copied ' : 'Copied ') + (tally.files ? tally.files.toString().cyan + ' files' : ''));
+        tally.dirs ? 'Created ' + tally.dirs.toString().cyan + ' directories, copied ' : 'Copied ') + (tally.files ? tally.files.toString().cyan + ' files' : ''));
       grunt.verbose.writeln('Connection :: close');
       done();
     });
