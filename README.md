@@ -235,7 +235,7 @@ options: {
          agent: process.env.SSH_AUTH_SOCK
 }
 ```
-If you use ```jshint```, rember to add ```process: true``` in ```globals``` 
+If you use ```jshint```, remember to add ```process: true``` in ```globals``` 
 
 ###### readyTimeout ```integer```
 
