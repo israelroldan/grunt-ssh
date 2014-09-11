@@ -1,3 +1,5 @@
+**New owner wanted!** I no longer use `grunt-ssh`, so am [looking for a new owner](http://andrew-jones.com/blog/new-owner-wanted-for-grunt-ssh/) for the project. Please contact me via GitHUb if you're interested.
+
 # grunt-ssh
 
 [![Build Status](https://travis-ci.org/andrewrjones/grunt-ssh.png?branch=master)](https://travis-ci.org/andrewrjones/grunt-ssh)
