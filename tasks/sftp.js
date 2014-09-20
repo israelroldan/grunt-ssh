@@ -97,7 +97,10 @@ module.exports = function (grunt) {
 
         async.eachSeries(files, function (file, callback) {
           var srcFiles = options.mode === 'upload' ? grunt.file.expand(options.minimatch, file.src) : file.orig.src;
-
+          var fileQueue = [];
+          var functionQueue = [];
+          var paths = [];
+          
           if (options.mode === 'download') {
             if (srcFiles.length === 0) {
               return callback(new Error('Unable to copy; no valid remote files were found.'));
@@ -271,9 +274,6 @@ module.exports = function (grunt) {
               // TODO - before we start copying files ensure all
               // the directories we are copying into will exist, otherwise
               // the async thingie causes problems
-              var fileQueue = [];
-              var functionQueue = [];
-              var paths = [];
 
               srcFiles.forEach(function (srcFile) {
                 if (grunt.file.isDir(srcFile)) {
