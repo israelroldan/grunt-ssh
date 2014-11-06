@@ -326,6 +326,24 @@ If you use ```jshint```, remember to add ```process: true``` in ```globals```
 
 How often (in milliseconds) to wait for the SSH handshake to complete.
 
+## Note
+
+sshexec runs each command individually, and it does not keep state of the previous command, so when you need to perform 2 commands or more , you could do e.g.:
+
+```js
+sshexec: {
+  test: {
+    command: ['sh -c "cd /; ls; pwd"'],
+    options: {
+      host: '<%= secret.host %>',
+      username: '<%= secret.username %>',
+      password: '<%= secret.password %>'
+    }
+  }
+}
+```
+
+
 ## Links
 
 * [Grunt your deployments too - toptable Tech Blog](http://tech.toptable.co.uk/blog/2013/08/08/grunt-your-deployments-too/)
