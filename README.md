@@ -350,6 +350,7 @@ sshexec: {
 * [Grunt Deployment over SSH with Git - Justin Klemm](http://justinklemm.com/grunt-js-deployment-ssh-git/)
 
 ## Release History
+* 2015/02/07 - v0.12.1 - [#92](https://github.com/chuckmo/grunt-ssh/pull/92) Fixed ssh2 dependency to version 0.3.x ([bostrom (Fredrik Boström)](https://github.com/bostrom))
 * 2014/09/11 - v0.12.0 - [#70:](https://github.com/andrewrjones/grunt-ssh/pull/70) Ensure empty directories are created ([Robert Price](https://github.com/robertprice)); [#71:](https://github.com/andrewrjones/grunt-ssh/pull/72) Enables forwarding of the authentication agent connection ([Yannis Sgarra](https://github.com/yannissgarra)); [#73:](https://github.com/andrewrjones/grunt-ssh/pull/73) Downloading files ([sheo13666](https://github.com/sheo13666)); [#75:](https://github.com/andrewrjones/grunt-ssh/pull/75) Doc fix ([Alexander Afanasiev](https://github.com/alecxe)).
 * 2014/06/04 - v0.11.2 - [#63:](https://github.com/andrewrjones/grunt-ssh/pull/63) `sftp` improvements [(Brian White](https://github.com/mscdex); [#64:](https://github.com/andrewrjones/grunt-ssh/pull/64) Changed error handling for SFTP [junglebarry](https://github.com/junglebarry)
 * 2014/03/21 - v0.11.1 - [#59:](https://github.com/andrewrjones/grunt-ssh/pull/59) Don't add '/' to empty path ([David J. Bradshaw](https://github.com/davidjbradshaw)).
