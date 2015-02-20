@@ -33,7 +33,8 @@ module.exports = function (grunt) {
       ignoreErrors: false,
       minimatch: {},
       pty: {},
-      suppressRemoteErrors: false
+      suppressRemoteErrors: false,
+      callback: function() {}
     });
 
     grunt.verbose.writeflags(options, 'Raw Options');
@@ -91,8 +92,9 @@ module.exports = function (grunt) {
           if (err) {
             throw err;
           }
+          var out;
           stream.on('data', function (data, extended) {
-            var out = String(data);
+            out = String(data);
             if (extended === 'stderr') {
               if (!options.suppressRemoteErrors) {
                 grunt.log.warn(out);
@@ -106,6 +108,9 @@ module.exports = function (grunt) {
           });
           stream.on('end', function () {
             grunt.verbose.writeln('Stream :: EOF');
+            if (out && typeof options.callback === "function") {
+              options.callback(out.trim());
+            }
           });
           stream.on('close', function () {
             grunt.verbose.writeln('Stream :: close');
