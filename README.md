@@ -135,7 +135,7 @@ files: {
 
 ###### path ```string```
 
-The path on the remote server. Defaults to home.
+The path on the remote server. Defaults to `/`.
 
 ###### minimatch ```object```
 
