@@ -1,7 +1,7 @@
 {
   "name": "grunt-ssh",
   "description": "SSH and SFTP tasks for Grunt",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "homepage": "https://github.com/andrewrjones/grunt-ssh",
   "author": {
     "name": "Andrew Jones",
