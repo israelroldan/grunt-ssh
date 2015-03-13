@@ -195,6 +195,10 @@ Show a progress bar during the file transfer.  The default is ```false```.
 
 Size of each read in bytes (default: 32768)
 
+###### callback ```function```
+
+Callback function called after command execution. Default: ```empty function```
+
 ##### Connection options
 
 There are three mutually exclusive sets of connection options. They are
