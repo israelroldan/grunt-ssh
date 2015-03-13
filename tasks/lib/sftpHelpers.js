@@ -21,7 +21,7 @@ exports.init = function (grunt) {
           grunt.verbose.writeln("Creating " + currentPath);
           c.mkdir(currentPath, attributes, function (error) {
             if (error) {
-              finalCallback(false, "Failed to create " + path);
+              finalCallback(false, "Failed to create " + path + " " + error);
             }
             else {
               callback(true);
