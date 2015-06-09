@@ -27,6 +27,9 @@ module.exports = function (grunt) {
       password: false,
       agent: "",
       port: utillib.port,
+      proxy: {
+        port: utillib.port
+      },
       minimatch: {},
       srcBasePath: "",
       destBasePath: "",
@@ -381,6 +384,30 @@ module.exports = function (grunt) {
     });
 
     var connectionOptions = utillib.parseConnectionOptions(options);
-    c.connect(connectionOptions);
+    if (options.proxy.host) {
+      var proxyConnectionOptions = utillib.parseConnectionOptions(options.proxy);
+      var proxyConnection = new Connection();
+      proxyConnection.on('connect', function () {
+        grunt.verbose.writeln('Proxy connection :: connect');
+      });
+      proxyConnection.on('error', function (err) {
+        grunt.fail.warn('Proxy connection :: error :: ' + err);
+      });
+      proxyConnection.on('ready', function() {
+        grunt.verbose.writeln('Proxy connection :: ready');
+        proxyConnection.exec('nc ' + connectionOptions.host + ' ' + connectionOptions.port, function(err, stream) {
+          if (err) {
+            proxyConnection.end();
+            throw err;
+          }
+          connectionOptions.sock = stream;
+          c.connect(connectionOptions);
+        });
+      });
+      proxyConnection.connect(proxyConnectionOptions);
+    }
+    else {
+      c.connect(connectionOptions);
+    }
   });
 };
