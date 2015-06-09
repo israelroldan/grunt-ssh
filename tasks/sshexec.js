@@ -112,11 +112,11 @@ module.exports = function (grunt) {
               options.callback(out.trim());
             }
           });
-          stream.on('close', function () {
-            grunt.verbose.writeln('Stream :: close');
+          stream.on('exit', function () {
+            grunt.verbose.writeln('Stream :: exit');
           });
-          stream.on('exit', function (code, signal) {
-            grunt.verbose.writeln('Stream :: exit :: code: ' + code + ', signal: ' + signal);
+          stream.on('close', function (code, signal) {
+            grunt.verbose.writeln('Stream :: close :: code: ' + code + ', signal: ' + signal);
             if (!options.ignoreErrors && code !== 0) {
               grunt.fail.warn('Error executing task ' + command);
               c.end();
