@@ -360,7 +360,7 @@ module.exports = function (grunt) {
           }
         }, function (err) {
           if (err) {
-            grunt.log.error(err);
+            grunt.fail.warn(err);
           }
           c.end();
         });
