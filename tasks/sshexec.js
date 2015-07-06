@@ -62,6 +62,19 @@ module.exports = function (grunt) {
 
     grunt.verbose.writeflags(options, 'Options');
 
+    c.on('keyboard-interactive', function(){
+      var prompts = arguments[3];
+      var reply = arguments[4];
+
+      prompts.forEach(function(question){
+        var msg = question.prompt.toLowerCase();
+
+        if (msg.indexOf('password') !== -1){
+          reply([options.password]);
+        }
+      });
+    });
+
     c.on('connect', function () {
       grunt.verbose.writeln('Connection :: connect');
     });
@@ -132,6 +145,7 @@ module.exports = function (grunt) {
     }
 
     var connectionOptions = utillib.parseConnectionOptions(options);
+    connectionOptions.tryKeyboard = true;
     if (options.proxy.host) {
       var proxyConnectionOptions = utillib.parseConnectionOptions(options.proxy);
       var proxyConnection = new Connection();

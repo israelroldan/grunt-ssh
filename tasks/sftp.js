@@ -82,6 +82,19 @@ module.exports = function (grunt) {
     var c = new Connection();
     var done = this.async();
 
+    c.on('keyboard-interactive', function(){
+      var prompts = arguments[3];
+      var reply = arguments[4];
+
+      prompts.forEach(function(question){
+        var msg = question.prompt.toLowerCase();
+
+        if (msg.indexOf('password') !== -1){
+          reply([options.password]);
+        }
+      });
+    });
+
     c.on('connect', function () {
       grunt.verbose.writeln('Connection :: connect');
     }).on('ready', function () {
@@ -103,7 +116,7 @@ module.exports = function (grunt) {
           var fileQueue = [];
           var functionQueue = [];
           var paths = [];
-          
+
           if (options.mode === 'download') {
             if (srcFiles.length === 0) {
               return callback(new Error('Unable to copy; no valid remote files were found.'));
@@ -384,6 +397,7 @@ module.exports = function (grunt) {
     });
 
     var connectionOptions = utillib.parseConnectionOptions(options);
+    connectionOptions.tryKeyboard = true;
     if (options.proxy.host) {
       var proxyConnectionOptions = utillib.parseConnectionOptions(options.proxy);
       var proxyConnection = new Connection();
