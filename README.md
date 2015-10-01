@@ -1,3 +1,5 @@
+**New owner wanted!** A few months after I took over maintenance from the venerable @andrewrjones, I too moved away from Grunt and no longer use `grunt-ssh`. So I am looking for a new owner for the project. Please email gmail@rosenbury.com if you're interested.
+
 # grunt-ssh
 
 [![Build Status](https://travis-ci.org/andrewrjones/grunt-ssh.png?branch=master)](https://travis-ci.org/andrewrjones/grunt-ssh)
