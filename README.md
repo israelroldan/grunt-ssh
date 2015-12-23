@@ -3,6 +3,8 @@
 
 # grunt-ssh
 
+[![Join the chat at https://gitter.im/israelroldan/grunt-ssh](https://badges.gitter.im/israelroldan/grunt-ssh.svg)](https://gitter.im/israelroldan/grunt-ssh?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/israelroldan/grunt-ssh.png?branch=master)](https://travis-ci.org/israelroldan/grunt-ssh)
 [![NPM version](https://badge.fury.io/js/grunt-ssh.png)](http://badge.fury.io/js/grunt-ssh)
 ![Dependencies](https://david-dm.org/israelroldan/grunt-ssh.png)
