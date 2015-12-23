@@ -3,7 +3,7 @@
 
 # grunt-ssh
 
-[![Build Status](https://travis-ci.org/israelroldan/grunt-ssh.png?branch=master)](https://travisan-ci.org/israelroldan/grunt-ssh)
+[![Build Status](https://travis-ci.org/israelroldan/grunt-ssh.png?branch=master)](https://travis-ci.org/israelroldan/grunt-ssh)
 [![NPM version](https://badge.fury.io/js/grunt-ssh.png)](http://badge.fury.io/js/grunt-ssh)
 ![Dependencies](https://david-dm.org/israelroldan/grunt-ssh.png)
 
