@@ -1,10 +1,11 @@
-**New owner wanted!** A few months after I took over maintenance from the venerable @andrewrjones, I too moved away from Grunt and no longer use `grunt-ssh`. So I am looking for a new owner for the project. Please email gmail@rosenbury.com if you're interested.
+**New owner!** Starting 12-23-2015, I (@israelroldan) am standing on the shoulders of two giants (@chuckmo and @andrewrjones) as maintainer of this project. Contributions are welcome as always.
+(This message will be removed on next release as well).
 
 # grunt-ssh
 
-[![Build Status](https://travis-ci.org/andrewrjones/grunt-ssh.png?branch=master)](https://travis-ci.org/andrewrjones/grunt-ssh)
+[![Build Status](https://travis-ci.org/israelroldan/grunt-ssh.png?branch=master)](https://travis-ci.org/israelroldan/grunt-ssh)
 [![NPM version](https://badge.fury.io/js/grunt-ssh.png)](http://badge.fury.io/js/grunt-ssh)
-![Dependencies](https://david-dm.org/andrewrjones/grunt-ssh.png)
+![Dependencies](https://david-dm.org/israelroldan/grunt-ssh.png)
 
 > SSH and SFTP tasks for Grunt, using [a pure JS implementation of ssh2](https://github.com/mscdex/ssh2).
 
@@ -29,7 +30,7 @@ This library provides two Grunt tasks for ssh:
 * _sftp_
 * _sshexec_
 
-*This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can't please use [v0.1.0](https://github.com/andrewrjones/grunt-ssh/tree/v0.1.0).*
+*This plugin was designed to work with Grunt 0.4.x. If you're still using grunt v0.3.x it's strongly recommended that [you upgrade](http://gruntjs.com/upgrading-from-0.3-to-0.4), but in case you can't please use [v0.1.0](https://github.com/israelroldan/grunt-ssh/tree/v0.1.0).*
 
 ## Synopsis
 
@@ -67,7 +68,7 @@ An example `secret.json` might look like:
 ```js
 {
     "host" : "myhost",
-    "username" : "andrewrjones",
+    "username" : "username",
     "password" : "**************"
 }
 ```
@@ -357,15 +358,15 @@ sshexec: {
 
 ## Release History
 * 2015/02/07 - v0.12.1 - [#92](https://github.com/chuckmo/grunt-ssh/pull/92) Fixed ssh2 dependency to version 0.3.x ([bostrom (Fredrik Boström)](https://github.com/bostrom))
-* 2014/09/11 - v0.12.0 - [#70:](https://github.com/andrewrjones/grunt-ssh/pull/70) Ensure empty directories are created ([Robert Price](https://github.com/robertprice)); [#71:](https://github.com/andrewrjones/grunt-ssh/pull/72) Enables forwarding of the authentication agent connection ([Yannis Sgarra](https://github.com/yannissgarra)); [#73:](https://github.com/andrewrjones/grunt-ssh/pull/73) Downloading files ([sheo13666](https://github.com/sheo13666)); [#75:](https://github.com/andrewrjones/grunt-ssh/pull/75) Doc fix ([Alexander Afanasiev](https://github.com/alecxe)).
-* 2014/06/04 - v0.11.2 - [#63:](https://github.com/andrewrjones/grunt-ssh/pull/63) `sftp` improvements [(Brian White](https://github.com/mscdex); [#64:](https://github.com/andrewrjones/grunt-ssh/pull/64) Changed error handling for SFTP [junglebarry](https://github.com/junglebarry)
-* 2014/03/21 - v0.11.1 - [#59:](https://github.com/andrewrjones/grunt-ssh/pull/59) Don't add '/' to empty path ([David J. Bradshaw](https://github.com/davidjbradshaw)).
-* 2014/03/15 - v0.11.0 - [#50:](https://github.com/andrewrjones/grunt-ssh/pull/50) Enable setting of `chunkSize` option ([Michael Lam](https://github.com/mlamz)); [#51:](https://github.com/andrewrjones/grunt-ssh/pull/51) Fix bad output on close ([Eric Kever](https://github.com/pinktrink)); [#56:](https://github.com/andrewrjones/grunt-ssh/pull/56) Add readyTimeout option for ssh2 connections ([calebTomlinson](https://github.com/calebTomlinson)).
-* 2014/01/16 - v0.10.0 - [#47:](https://github.com/andrewrjones/grunt-ssh/pull/47) Add an optional progress bar for sftp uploads ([Jason Williams](https://github.com/jaswilli)).
-* 2013/12/06 - v0.9.1 - [#44:](https://github.com/andrewrjones/grunt-ssh/issues/44) Improve doc for SSH connection options ([Mark Stosberg](https://github.com/markstos)); [#45:](https://github.com/andrewrjones/grunt-ssh/issues/45) Fix incorrect Connection parameter in `execCommand` ([jabes](https://github.com/jabes)).
-* 2013/12/06 - v0.9.0 - [#28:](https://github.com/andrewrjones/grunt-ssh/issues/28) Pseudo-TTY support; [#40:](https://github.com/andrewrjones/grunt-ssh/issues/40) Add trailing slash to path if needed; [#31:](https://github.com/andrewrjones/grunt-ssh/issues/31) Print debug messages from ssh2 when `--debug` option is passed; Use latest version of ssh2 (0.2.14).
-* 2013/11/17 - v0.8.0 - [#33:](https://github.com/andrewrjones/grunt-ssh/pull/33) File counter for `sftp` and `suppressRemoteErrors` option for `sshexec` ([David J. Bradshaw](https://github.com/davidjbradshaw)); [#34:](https://github.com/andrewrjones/grunt-ssh/pull/34) Use stat() instead of opendir() for checking existence of a dir ([Harri Hälikkä](https://github.com/harriha)); [#38:](https://github.com/andrewrjones/grunt-ssh/pull/34) Doc updates ([Alexandre Richonnier](https://github.com/heralight)).
-* 2013/10/17 - v0.7.0 - [#32:](https://github.com/andrewrjones/grunt-ssh/pull/32) Added command line options for username, password and passphrase ([David J. Bradshaw](https://github.com/davidjbradshaw)); Doc updates.
+* 2014/09/11 - v0.12.0 - [#70:](https://github.com/israelroldan/grunt-ssh/pull/70) Ensure empty directories are created ([Robert Price](https://github.com/robertprice)); [#71:](https://github.com/israelroldan/grunt-ssh/pull/72) Enables forwarding of the authentication agent connection ([Yannis Sgarra](https://github.com/yannissgarra)); [#73:](https://github.com/israelroldan/grunt-ssh/pull/73) Downloading files ([sheo13666](https://github.com/sheo13666)); [#75:](https://github.com/israelroldan/grunt-ssh/pull/75) Doc fix ([Alexander Afanasiev](https://github.com/alecxe)).
+* 2014/06/04 - v0.11.2 - [#63:](https://github.com/israelroldan/grunt-ssh/pull/63) `sftp` improvements [(Brian White](https://github.com/mscdex); [#64:](https://github.com/israelroldan/grunt-ssh/pull/64) Changed error handling for SFTP [junglebarry](https://github.com/junglebarry)
+* 2014/03/21 - v0.11.1 - [#59:](https://github.com/israelroldan/grunt-ssh/pull/59) Don't add '/' to empty path ([David J. Bradshaw](https://github.com/davidjbradshaw)).
+* 2014/03/15 - v0.11.0 - [#50:](https://github.com/israelroldan/grunt-ssh/pull/50) Enable setting of `chunkSize` option ([Michael Lam](https://github.com/mlamz)); [#51:](https://github.com/israelroldan/grunt-ssh/pull/51) Fix bad output on close ([Eric Kever](https://github.com/pinktrink)); [#56:](https://github.com/israelroldan/grunt-ssh/pull/56) Add readyTimeout option for ssh2 connections ([calebTomlinson](https://github.com/calebTomlinson)).
+* 2014/01/16 - v0.10.0 - [#47:](https://github.com/israelroldan/grunt-ssh/pull/47) Add an optional progress bar for sftp uploads ([Jason Williams](https://github.com/jaswilli)).
+* 2013/12/06 - v0.9.1 - [#44:](https://github.com/israelroldan/grunt-ssh/issues/44) Improve doc for SSH connection options ([Mark Stosberg](https://github.com/markstos)); [#45:](https://github.com/israelroldan/grunt-ssh/issues/45) Fix incorrect Connection parameter in `execCommand` ([jabes](https://github.com/jabes)).
+* 2013/12/06 - v0.9.0 - [#28:](https://github.com/israelroldan/grunt-ssh/issues/28) Pseudo-TTY support; [#40:](https://github.com/israelroldan/grunt-ssh/issues/40) Add trailing slash to path if needed; [#31:](https://github.com/israelroldan/grunt-ssh/issues/31) Print debug messages from ssh2 when `--debug` option is passed; Use latest version of ssh2 (0.2.14).
+* 2013/11/17 - v0.8.0 - [#33:](https://github.com/israelroldan/grunt-ssh/pull/33) File counter for `sftp` and `suppressRemoteErrors` option for `sshexec` ([David J. Bradshaw](https://github.com/davidjbradshaw)); [#34:](https://github.com/israelroldan/grunt-ssh/pull/34) Use stat() instead of opendir() for checking existence of a dir ([Harri Hälikkä](https://github.com/harriha)); [#38:](https://github.com/israelroldan/grunt-ssh/pull/34) Doc updates ([Alexandre Richonnier](https://github.com/heralight)).
+* 2013/10/17 - v0.7.0 - [#32:](https://github.com/israelroldan/grunt-ssh/pull/32) Added command line options for username, password and passphrase ([David J. Bradshaw](https://github.com/davidjbradshaw)); Doc updates.
 * 2013/09/25 - v0.6.2 - Allow sftp task to use the shared sshconfig; Allow overriding sshconfig properties in the task config ([Andy Royle](https://github.com/andyroyle)). Document using the private key with `sshexec`.
 * 2013/07/25 - v0.6.2 - Fix error when no passphrase is provided ([James Wyse](https://github.com/jameswyse)).
 * 2013/07/21 - v0.6.1 - `trim` options that may be read from files; Allow `sshexec` to use ssh-agent-based user authentication ([Andy Shinn](https://github.com/andyshinn)).
@@ -382,5 +383,5 @@ sshexec: {
 * 2013/02/13 - v0.1.0 - Initial release with _sshexec_ and _sftp_ tasks.
 
 ## License
-Copyright (c) 2013 [Andrew Jones](http://andrew-jones.com)
+Copyright (c) 2013 [Andrew Jones](http://andrew-jones.com).
 Licensed under the MIT license.
